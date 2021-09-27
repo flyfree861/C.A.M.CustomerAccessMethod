@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">C.A.M (Customer Access Method)</string>
+    <string name="splash_screen_welcome">Welcome</string>
+    <string name="sEmail">Email</string>
+    <string name="sPassword">Password</string>
+    <string name="login">Login</string>
+    <string name="SignInWithGoogle">Sign in with Google</string>
+    <string name="userRegistration">not registered yet? <u>Sign in</u></string>
+</resources>
