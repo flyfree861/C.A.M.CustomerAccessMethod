@@ -113,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void register()
     {
-        Toast.makeText(MainActivity.this, "Work in progres the funcionality will be implement as soon as possible", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+        startActivity(intent);
     }
 
     private void signInGoogle()

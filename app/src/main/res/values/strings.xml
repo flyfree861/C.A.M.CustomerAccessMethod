@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">C.A.M (Customer Access Method)</string>
     <string name="splash_screen_welcome">Welcome</string>
     <string name="sEmail">Email</string>
@@ -6,10 +7,11 @@
     <string name="login">Login</string>
     <string name="SignInWithGoogle">Sign in with Google</string>
     <string name="userRegistration">not registered yet? <u>Sign in</u></string>
+    <string name="registrationTitle">Registration</string>
+    <string name="sConfPassword">Confirm Password</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_app_id">568688654371939</string>
     <string name="fb_login_protocol_scheme">fb568688654371939</string>
-
 
 </resources>

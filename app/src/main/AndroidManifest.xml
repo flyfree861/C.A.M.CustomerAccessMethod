@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CAMCustomerAccessMethod">
         <activity
+            android:name=".RegistrationActivity"
+            android:exported="true" />
+        <activity
             android:name=".SignInFacebook"
             android:exported="true" />
         <activity
