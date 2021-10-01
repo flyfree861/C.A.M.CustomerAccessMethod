@@ -11,13 +11,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity
+{
 
     Animation topAnim,bottomAnim;
     ImageView logo;
     TextView primo,secondo,terzo;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_screen);

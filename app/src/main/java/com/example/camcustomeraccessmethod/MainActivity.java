@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -28,19 +34,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     GoogleSignInClient mGoogleSignInClient;
     Button logOut;
-    SignInButton signInButton;
+    ImageView btnGoogle, btnFacebook;
     TextView txtRegister;
+    EditText txtUser, txtPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         logOut = findViewById(R.id.btnLogin);
 
-        // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -48,16 +57,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .requestEmail()
                 .build();
 
+
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         setContentView(R.layout.activity_main);
 
+        txtUser = findViewById(R.id.txtUser);
+        txtPassword = findViewById(R.id.txtPassword);
+
         txtRegister = findViewById(R.id.txtRegisterUsr);
         txtRegister.setOnClickListener(this);
 
-        signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(this);
+        btnGoogle = findViewById(R.id.btnRegWithGoogle);
+        btnGoogle.setOnClickListener(this);
+
+        btnFacebook = findViewById(R.id.btnRegWithFacebook);
+        btnFacebook.setOnClickListener(this);
 
         logOut = findViewById(R.id.btnLogin);
         logOut.setOnClickListener(this);
@@ -70,15 +86,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         switch (view.getId())
         {
-            case R.id.sign_in_button:
-                signIn();
+            case R.id.btnRegWithGoogle:
+                signInGoogle();
                 break;
+
+            case R.id.btnRegWithFacebook:
+            signInFacebook();
+            break;
+
             case R.id.btnLogin:
                 signOut();
                 break;
+
             case R.id.txtRegisterUsr:
                 register();
+                break;
         }
+    }
+
+    private void signInFacebook()
+    {
+      Intent intent = new Intent(MainActivity.this, SignInFacebook.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      startActivity(intent);
     }
 
     private void register()
@@ -86,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this, "Work in progres the funcionality will be implement as soon as possible", Toast.LENGTH_LONG).show();
     }
 
-    private void signIn() {
+    private void signInGoogle()
+    {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -146,7 +177,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void signOut() {
+    private void signOut()
+    {
+
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>()
                 {
