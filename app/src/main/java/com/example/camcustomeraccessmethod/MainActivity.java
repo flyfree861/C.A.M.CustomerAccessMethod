@@ -24,7 +24,9 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int RC_SIGN_IN = 253;
     private static final String TAG = "MainActivity";
     GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
     Button logOut;
     ImageView btnGoogle, btnFacebook;
     TextView txtRegister;
@@ -42,14 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         logOut = findViewById(R.id.btnLogin);
 
+        mAuth = FirebaseAuth.getInstance();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
 
             case R.id.btnLogin:
-                signOut();
+                loginWemailApassword(txtUser.getText().toString(), txtPassword.getText().toString());
                 break;
 
             case R.id.txtRegisterUsr:
@@ -131,6 +132,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         updateUI(account);
+
+        //Firebase auth for email check
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null)
+        {
+            txtUser.setText(currentUser.getEmail().toString());
+        }
     }
 
     private void updateUI(GoogleSignInAccount account)
@@ -178,10 +186,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void signOut()
+    private void loginWemailApassword(String email, String password)
     {
-
-        mGoogleSignInClient.signOut()
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUIEmailPassword(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                    }
+                });
+        /*mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>()
                 {
                     @Override
@@ -189,7 +209,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     {
                         Toast.makeText(MainActivity.this,"You are now logged out",Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
+    }
+
+    private void updateUIEmailPassword(FirebaseUser user)
+    {
+        //Implements Code
     }
 
 
