@@ -18,7 +18,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/tltImage"
@@ -34,7 +34,6 @@
         android:id="@+id/txtRegEmail"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:drawableLeft="@drawable/ic_mail"
         android:drawablePadding="10dp"
         android:layout_width="360dp"
         android:layout_height="50dp"
@@ -47,7 +46,7 @@
     <EditText
         android:id="@+id/txtRegPassword"
         android:textColor="@color/white"
-        android:drawableLeft="@drawable/ic_password"
+        android:inputType="textPassword"
         android:drawablePadding="10dp"
         android:layout_width="360dp"
         android:layout_height="50dp"
@@ -61,7 +60,7 @@
     <EditText
         android:id="@+id/txtRegConfPassword"
         android:textColor="@color/white"
-        android:drawableLeft="@drawable/ic_checked"
+        android:inputType="textPassword"
         android:drawablePadding="10dp"
         android:layout_width="360dp"
         android:layout_height="50dp"
@@ -71,6 +70,8 @@
         android:hint="@string/sConfPassword"
         android:paddingLeft="20dp"
         android:layout_marginTop="30dp"/>
+
+
 
     <Button
         android:id="@+id/btnRegRegistration"
@@ -83,5 +84,16 @@
         android:text="@string/registrationTitle"
         android:textColor="#FFFFFF"
         android:textColorLink="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btnRegShowPsw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="60dp"
+        android:background="#00FFFFFF"
+        android:foregroundGravity="center_vertical"
+        android:src="@drawable/ic_show_psw" />
 
 </LinearLayout>

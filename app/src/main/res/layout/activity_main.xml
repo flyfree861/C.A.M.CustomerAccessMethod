@@ -22,28 +22,18 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cViewTitleLogin"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:elevation="12dp"
-        app:cardCornerRadius="40dp"
-        android:innerRadius="0dp"
-        android:shape="ring"
-        android:thicknessRatio="1.9">
 
-        <ImageView
-            android:id="@+id/tltImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_connection_atom">
+    <ImageView
+        android:id="@+id/tltImage"
+        android:layout_width="90dp"
+        android:layout_height="105dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_cam" />
 
-        </ImageView>
-    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -119,12 +109,12 @@
             android:src="@drawable/ic_google" />
 
         <ImageView
-            android:id="@+id/btnRegWithFacebook"
-            android:layout_marginTop="20dp"
+            android:id="@+id/btnRegWithFinger"
+            android:layout_width="56dp"
+            android:layout_height="54dp"
             android:layout_marginLeft="20dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_facebook" />
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_finger_print" />
 
 
     </LinearLayout>

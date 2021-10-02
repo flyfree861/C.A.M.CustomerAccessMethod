@@ -16,7 +16,7 @@ public class SplashScreen extends AppCompatActivity
 
     Animation topAnim,bottomAnim;
     ImageView logo;
-    TextView primo,secondo,terzo;
+    TextView primo,secondo;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,12 +29,10 @@ public class SplashScreen extends AppCompatActivity
         logo = findViewById(R.id.logo);
         primo = findViewById(R.id.firstSent);
         secondo = findViewById(R.id.secondSent);
-        terzo = findViewById(R.id.thirdSent);
 
         logo.setAnimation(topAnim);
         primo.setAnimation(bottomAnim);
         secondo.setAnimation(bottomAnim);
-        terzo.setAnimation(bottomAnim);
 
         new Handler().postDelayed(new Runnable()
         {

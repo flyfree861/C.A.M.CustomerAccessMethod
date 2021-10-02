@@ -9,6 +9,8 @@
     <string name="userRegistration">not registered yet? <u>Sign in</u></string>
     <string name="registrationTitle">Registration</string>
     <string name="sConfPassword">Confirm Password</string>
+    <string name="sFingerPrint">Put your finger on sensor</string>
+
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_app_id">568688654371939</string>

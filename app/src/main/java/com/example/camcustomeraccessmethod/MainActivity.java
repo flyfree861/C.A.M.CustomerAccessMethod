@@ -2,8 +2,14 @@ package com.example.camcustomeraccessmethod;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +28,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
@@ -29,17 +37,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private static final int RC_SIGN_IN = 253;
+    private static final int RC_SIGN_IN = 1;//253;
     private static final String TAG = "MainActivity";
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     Button logOut;
-    ImageView btnGoogle, btnFacebook;
+    ImageView btnGoogle, btnFinger;
     TextView txtRegister;
     EditText txtUser, txtPassword;
+    private Executor executor;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
 
 
     @Override
@@ -62,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        setContentView(R.layout.activity_main);
-
         txtUser = findViewById(R.id.txtUser);
         txtPassword = findViewById(R.id.txtPassword);
 
@@ -73,13 +83,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnGoogle = findViewById(R.id.btnRegWithGoogle);
         btnGoogle.setOnClickListener(this);
 
-        btnFacebook = findViewById(R.id.btnRegWithFacebook);
-        btnFacebook.setOnClickListener(this);
+        btnFinger = findViewById(R.id.btnRegWithFinger);
+        btnFinger.setOnClickListener(this);
 
         logOut = findViewById(R.id.btnLogin);
         logOut.setOnClickListener(this);
 
+        String userFromActivity ="";
+        String passwordFromActivity = "";
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null)
+        {
+            userFromActivity = extras.getString("userName");
+            passwordFromActivity = extras.getString("password");
+        }
+        if (!userFromActivity.isEmpty())
+        {
+            txtUser.setText(userFromActivity);
+            txtPassword.setText(passwordFromActivity);
+        }
 
+
+        //===================================== Autenticazione Biometrica ==========================
+        executor = ContextCompat.getMainExecutor(MainActivity.this);
+        biometricPrompt = new BiometricPrompt(MainActivity.this, executor, new BiometricPrompt.AuthenticationCallback()
+        {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString)
+            {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(MainActivity.this, "Authantication Error"+errString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result)
+            {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(MainActivity.this, "Authanticated succesfully\n"+result.getCryptoObject(), Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(in);
+            }
+
+            @Override
+            public void onAuthenticationFailed()
+            {
+                super.onAuthenticationFailed();
+                Toast.makeText(MainActivity.this, "Authantication Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("CAM Biometric")
+                .setSubtitle("Login with Biometric sensor")
+                .setNegativeButtonText("Back")
+                .build();
+        //==========================================================================================
     }
 
     @Override
@@ -91,12 +149,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 signInGoogle();
                 break;
 
-            case R.id.btnRegWithFacebook:
-            signInFacebook();
-            break;
+            case R.id.btnRegWithFinger:
+                signInFinger();
+                break;
 
             case R.id.btnLogin:
-                loginWemailApassword(txtUser.getText().toString(), txtPassword.getText().toString());
+                if(!txtUser.getText().toString().isEmpty() && !txtPassword.getText().toString().isEmpty())
+                {
+                    loginWemailApassword(txtUser.getText().toString(), txtPassword.getText().toString());
+                }
                 break;
 
             case R.id.txtRegisterUsr:
@@ -105,19 +166,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void signInFacebook()
+// ================================== Login Biometric ==============================================
+    private void signInFinger()
     {
-      Intent intent = new Intent(MainActivity.this, SignInFacebook.class);
-      intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-      startActivity(intent);
+        biometricPrompt.authenticate(promptInfo);
     }
 
-    private void register()
-    {
-        Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
-        startActivity(intent);
-    }
 
+
+//=================================== Login with Google ============================================
     private void signInGoogle()
     {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -131,13 +188,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
+        //updateUI(account);
 
         //Firebase auth for email check
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null)
+        if( currentUser != null)
         {
-            txtUser.setText(currentUser.getEmail().toString());
+            txtUser.setText(currentUser.getEmail());
+            mAuth.signOut();
         }
     }
 
@@ -149,7 +207,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
 
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -168,8 +227,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try
         {
             GoogleSignInAccount account = task.getResult(ApiException.class);
+            if(account.getAccount() != null)
+            {
 
-            Toast.makeText(this, "Welcome back Mr.\n"+ account.getDisplayName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Welcome back Mr.\n"+ account.getDisplayName(), Toast.LENGTH_LONG).show();
+                mGoogleSignInClient.signOut();
+            }
+            else
+            {
+                Toast.makeText(this, "Welcome, please signin or register a new user\n"+ account.getDisplayName(), Toast.LENGTH_LONG).show();
+            }
+
 
             //TODO se gia loggato aprira la prossima pagina
             // Signed in successfully, show authenticated UI.
@@ -185,32 +253,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+//================================ Login Emai and Password =========================================
+    private void register()
+    {
+        Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+        if(!txtUser.getText().toString().isEmpty())
+        {
+            intent.putExtra("userNamePassed",txtUser.getText().toString());
+        }
+        if(!txtPassword.getText().toString().isEmpty())
+        {
+            intent.putExtra("passwordPassed",txtPassword.getText().toString());
+        }
+        startActivity(intent);
+    }
 
     private void loginWemailApassword(String email, String password)
     {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUIEmailPassword(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                        updateUI(null);
-                    }
-                });
-        /*mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>()
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(this, new OnSuccessListener<AuthResult>()
                 {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task)
+                    public void onSuccess(@NonNull AuthResult authResult)
                     {
-                        Toast.makeText(MainActivity.this,"You are now logged out",Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(MainActivity.this, "Login with success", Toast.LENGTH_LONG).show();
+                        mAuth.signOut();
                     }
-                });*/
+
+
+                }).addOnFailureListener(new OnFailureListener()
+        {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+
+                Toast.makeText(MainActivity.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+
 
     private void updateUIEmailPassword(FirebaseUser user)
     {

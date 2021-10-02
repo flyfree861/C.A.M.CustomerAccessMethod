@@ -10,15 +10,16 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_connection_atom"
-        android:layout_marginTop="-100dp" />
+        android:layout_width="296dp"
+        android:layout_height="218dp"
+        android:layout_marginTop="-100dp"
+        android:src="@drawable/logo_small" />
 
     <TextView
         android:id="@+id/firstSent"
         android:layout_width="334dp"
         android:layout_height="32dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins"
         android:text="C.A.M (Customer Access Mode)"
         android:textColor="@color/white"
@@ -31,33 +32,18 @@
 
     <TextView
         android:id="@+id/secondSent"
-        android:layout_width="155dp"
-        android:layout_height="28dp"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="EvoMav Application"
-        android:textSize="15dp"
+        android:text="EvoMav Application®"
         android:textColor="@color/white"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.439" />
-
-    <TextView
-        android:id="@+id/thirdSent"
-        android:layout_width="122dp"
-        android:layout_height="32dp"
-        android:fontFamily="@font/poppins"
-        android:text="All rights reserved®"
-        android:textColor="@color/white"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469" />
 
 
 </LinearLayout>
