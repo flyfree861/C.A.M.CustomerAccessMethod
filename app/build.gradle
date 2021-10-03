@@ -50,4 +50,8 @@ dependencies {
 
     //Access with fingerprint
     implementation 'androidx.biometric:biometric:1.1.0'
+
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+
 }

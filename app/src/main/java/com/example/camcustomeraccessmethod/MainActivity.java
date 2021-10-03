@@ -8,19 +8,24 @@ import androidx.core.content.ContextCompat;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,6 +42,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
@@ -46,14 +52,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     Button logOut;
-    ImageView btnGoogle, btnFinger;
+    ImageView btnGoogle, btnFinger, tltImage;
     TextView txtRegister;
     EditText txtUser, txtPassword;
+    ImageButton btnShowPsw;
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -73,6 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        tltImage = findViewById(R.id.tltImage);
+
+        btnShowPsw = findViewById(R.id.btnMainShowPsw);
 
         txtUser = findViewById(R.id.txtUser);
         txtPassword = findViewById(R.id.txtPassword);
@@ -138,6 +153,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButtonText("Back")
                 .build();
         //==========================================================================================
+
+        btnShowPsw.setOnTouchListener((view, motionEvent) ->
+        {
+            switch ( motionEvent.getAction() )
+            {
+
+                case MotionEvent.ACTION_UP:
+                    txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    txtPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                    break;
+
+            }
+            return true;
+        });
     }
 
     @Override
@@ -175,35 +207,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 //=================================== Login with Google ============================================
+
     private void signInGoogle()
     {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //updateUI(account);
-
-        //Firebase auth for email check
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if( currentUser != null)
-        {
-            txtUser.setText(currentUser.getEmail());
-            mAuth.signOut();
-        }
-    }
-
-    private void updateUI(GoogleSignInAccount account)
-    {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-       // startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
 
     @Override
@@ -229,7 +237,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GoogleSignInAccount account = task.getResult(ApiException.class);
             if(account.getAccount() != null)
             {
-
+                String personImage = Objects.requireNonNull(account.getPhotoUrl()).toString();
+                Glide.with(this).load(personImage).into(tltImage);
                 Toast.makeText(this, "Welcome back Mr.\n"+ account.getDisplayName(), Toast.LENGTH_LONG).show();
                 mGoogleSignInClient.signOut();
             }
@@ -248,11 +257,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+            Toast.makeText(MainActivity.this, "signInResult:failed code=\n"+ e.getStatusCode(), Toast.LENGTH_LONG).show();
         }
 
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
+
+        //Firebase auth for email check
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if( currentUser != null)
+        {
+            txtUser.setText(currentUser.getEmail());
+          //  mAuth.signOut();
+        }
+    }
+
 //================================ Login Emai and Password =========================================
     private void register()
     {
