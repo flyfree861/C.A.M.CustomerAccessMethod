@@ -45,27 +45,71 @@
         android:paddingLeft="30dp"
         android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/txtUser"
-        android:textColorHint="@color/white"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/input"
-        android:hint="@string/sEmail"
-        android:paddingLeft="20dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="163dp">
 
-    <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:textColorHint="@color/white"
-        android:background="@drawable/input"
-        android:hint="@string/sPassword"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="30dp"/>
+        <EditText
+            android:id="@+id/txtUser"
+            android:layout_width="388dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="83dp"
+            android:background="@drawable/input"
+            android:hint="@string/sEmail"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:textColor="@color/white"
+            android:layout_width="388dp"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="102dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/input"
+            android:hint="@string/sPassword"
+            android:paddingLeft="20dp"
+            android:textColorHint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnMainShowPsw"
+            android:layout_width="58dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="334dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="19dp"
+            android:background="#00FFFFFF"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="fitStart"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/ic_hide_psw" />
+
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -101,26 +145,7 @@
             android:textColor="#FFFFFF"
             android:textColorLink="@color/white" />
 
-        <ImageButton
-            android:id="@+id/btnMainShowPsw"
-            android:layout_width="100dp"
-            android:layout_height="95dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="42dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="269dp"
-            android:layout_marginBottom="32dp"
-            android:background="#00FFFFFF"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="fitStart"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:src="@drawable/ic_show_psw" />
+
     </RelativeLayout>
 
 

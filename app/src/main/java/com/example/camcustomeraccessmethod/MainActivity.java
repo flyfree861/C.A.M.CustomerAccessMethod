@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -82,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+
 
         tltImage = findViewById(R.id.tltImage);
 
@@ -161,10 +161,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 case MotionEvent.ACTION_UP:
                     txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    txtPassword.setTextColor(Color.parseColor("#FFFFFF"));
                     break;
 
                 case MotionEvent.ACTION_DOWN:
                     txtPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                    txtPassword.setTextColor(Color.parseColor("#FFFFFF"));
                     break;
 
             }
