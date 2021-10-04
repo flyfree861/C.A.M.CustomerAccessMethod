@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(MainActivity.this, "Authanticated succesfully\n"+result.getCryptoObject(), Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(MainActivity.this, MainActivity.class);
+                Intent in = new Intent(MainActivity.this, MainMenu.class);
                 startActivity(in);
             }
 
@@ -250,9 +250,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
-            //TODO se gia loggato aprira la prossima pagina
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);
+             Intent in = new Intent(MainActivity.this, MainMenu.class);
+             startActivity(in);
         }
 
         catch (ApiException e)

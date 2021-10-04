@@ -3,7 +3,7 @@
     package="com.example.camcustomeraccessmethod">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CAMCustomerAccessMethod">
+        <activity
+            android:name=".MainMenu"
+            android:exported="true" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="true" />
