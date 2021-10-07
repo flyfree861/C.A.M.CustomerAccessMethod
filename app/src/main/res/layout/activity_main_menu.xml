@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnMainMenuShowConnection"
         android:layout_width="371dp"
         android:layout_height="91dp"
         android:background="@drawable/btn_main_menu"
@@ -56,13 +56,11 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/imageButton"
+        android:id="@+id/btnMainMenuNewConnection"
         android:layout_width="370dp"
         android:layout_height="88dp"
         android:background="@drawable/btn_main_menu"
@@ -72,10 +70,10 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321"
+        app:layout_constraintVertical_bias="0.331"
         app:srcCompat="@drawable/ic_new_connection" />
 
 
