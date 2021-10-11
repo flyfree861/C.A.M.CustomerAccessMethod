@@ -13,4 +13,5 @@
     <color name="signup">#13484f</color>
     <color name="background">#F0F4F3</color>
     <color name="statusbar">#50C2C9</color>
+    <color name="error">#FF0000</color>
 </resources>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".MainMenu">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -45,35 +44,43 @@
             android:textStyle="italic" />
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMainMenuShowConnection"
         android:layout_width="371dp"
         android:layout_height="91dp"
-        android:background="@drawable/btn_main_menu"
-        android:drawableTop="@drawable/ic_show_connection_48px"
+        android:background="@drawable/bg_main_gradient"
+        android:backgroundTint="@null"
+        android:drawableLeft="@drawable/ic_show_connection_48px"
         android:fontFamily="@font/poppins"
+        android:soundEffectsEnabled="true"
         android:text="Show all connection"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.343" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMainMenuNewConnection"
         android:layout_width="370dp"
         android:layout_height="88dp"
-        android:background="@drawable/btn_main_menu"
-        android:drawableTop="@drawable/ic_new_connection"
+        android:background="@drawable/bg_main_gradient"
+        android:drawableLeft="@drawable/ic_new_connection"
         android:fontFamily="@font/poppins"
+        android:soundEffectsEnabled="true"
         android:text="Create new connection"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.123"
         app:srcCompat="@drawable/ic_new_connection" />
 
 

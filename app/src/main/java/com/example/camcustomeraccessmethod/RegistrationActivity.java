@@ -39,30 +39,7 @@ public class RegistrationActivity extends AppCompatActivity
         txtPsw = findViewById(R.id.txtRegPassword);
         txtConfPsw = findViewById(R.id.txtRegConfPassword);
         btnLogin = findViewById(R.id.btnRegRegistration);
-        btnShowPsw = findViewById(R.id.btnRegShowPsw);
 
-        btnShowPsw.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                switch ( motionEvent.getAction() )
-                {
-
-                    case MotionEvent.ACTION_UP:
-                        txtPsw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        txtConfPsw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        break;
-
-                    case MotionEvent.ACTION_DOWN:
-                        txtPsw.setInputType(InputType.TYPE_CLASS_TEXT);
-                        txtConfPsw.setInputType(InputType.TYPE_CLASS_TEXT);
-                        break;
-
-                }
-                return true;
-            }
-        });
 
         btnLogin.setOnClickListener(view -> loginWemailApassword(txtEmail.getText().toString(),txtPsw.getText().toString()));
 

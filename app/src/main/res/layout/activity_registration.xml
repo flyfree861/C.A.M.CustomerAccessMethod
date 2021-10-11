@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity"
     android:background="@drawable/bg_main_gradient"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
@@ -30,70 +31,154 @@
 
     </ImageView>
 
-    <EditText
-        android:id="@+id/txtRegEmail"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:drawablePadding="10dp"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/input"
-        android:hint="@string/sEmail"
-        android:paddingLeft="20dp" />
-
-    <EditText
-        android:id="@+id/txtRegPassword"
-        android:textColor="@color/white"
-        android:inputType="textPassword"
-        android:drawablePadding="10dp"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:textColorHint="@color/white"
-        android:background="@drawable/input"
-        android:hint="@string/sPassword"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="30dp"/>
-
-    <EditText
-        android:id="@+id/txtRegConfPassword"
-        android:textColor="@color/white"
-        android:inputType="textPassword"
-        android:drawablePadding="10dp"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:textColorHint="@color/white"
-        android:background="@drawable/input"
-        android:hint="@string/sConfPassword"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="30dp"/>
-
-
-
-    <Button
-        android:id="@+id/btnRegRegistration"
-        android:layout_width="186dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblRegEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/login_btn"
-        android:fontFamily="@font/poppins"
-        android:text="@string/registrationTitle"
-        android:textColor="#FFFFFF"
-        android:textColorLink="@color/white" />
-
-    <ImageButton
-        android:id="@+id/btnRegShowPsw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="#00FFFFFF"
-        android:foregroundGravity="center_vertical"
-        android:src="@drawable/ic_show_psw" />
+        android:backgroundTint="@null"
+        android:backgroundTintMode="@null"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:endIconMode="clear_text"
+        app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/white"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="#FFFFFF"
+        app:startIconDrawable="@drawable/ic_mail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23000002">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtRegEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Email address"
+            app:boxStrokeErrorColor="@color/error"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="22dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblRegPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="@null"
+        android:backgroundTintMode="@null"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:helperText="Required minimum 8*"
+        app:helperTextTextColor="@color/white"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_password"
+        app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/white"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="#FFFFFF">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtRegPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="107dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblMainBoxPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="@null"
+        android:backgroundTintMode="@null"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:helperText="Required minimum 8*"
+        app:helperTextTextColor="@color/white"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_password"
+        app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/white"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24000001">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtRegConfPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Conferma password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="107dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegRegistration"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="177dp"
+        android:layout_height="49dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+         android:layout_marginTop="75dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/login"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:cornerRadius="10dp"
+        app:strokeColor="@color/white" />
+
 
 </LinearLayout>

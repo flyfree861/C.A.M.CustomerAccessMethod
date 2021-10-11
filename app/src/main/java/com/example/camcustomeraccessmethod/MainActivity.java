@@ -37,6 +37,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,14 +51,12 @@ import java.util.concurrent.Executor;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private static final int RC_SIGN_IN = 1;//253;
-    private static final String TAG = "MainActivity";
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    Button logOut;
+    Button btnLogin;
     ImageView btnGoogle, btnFinger, tltImage;
     TextView txtRegister;
-    EditText txtUser, txtPassword;
-    ImageButton btnShowPsw;
+    TextInputEditText txtUser,txtPassword;
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logOut = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -87,10 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tltImage = findViewById(R.id.tltImage);
 
-        btnShowPsw = findViewById(R.id.btnMainShowPsw);
-
-        txtUser = findViewById(R.id.txtUser);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtUser = findViewById(R.id.txtMainUser);
+        txtPassword = findViewById(R.id.txtMainPassword);
 
         txtRegister = findViewById(R.id.txtRegisterUsr);
         txtRegister.setOnClickListener(this);
@@ -101,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnFinger = findViewById(R.id.btnRegWithFinger);
         btnFinger.setOnClickListener(this);
 
-        logOut = findViewById(R.id.btnLogin);
-        logOut.setOnClickListener(this);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(this);
 
         String userFromActivity ="";
         String passwordFromActivity = "";
@@ -154,24 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
         //==========================================================================================
 
-        btnShowPsw.setOnTouchListener((view, motionEvent) ->
-        {
-            switch ( motionEvent.getAction() )
-            {
 
-                case MotionEvent.ACTION_UP:
-                    txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    txtPassword.setTextColor(Color.parseColor("#FFFFFF"));
-                    break;
-
-                case MotionEvent.ACTION_DOWN:
-                    txtPassword.setInputType(InputType.TYPE_CLASS_TEXT);
-                    txtPassword.setTextColor(Color.parseColor("#FFFFFF"));
-                    break;
-
-            }
-            return true;
-        });
     }
 
     @Override
@@ -188,10 +169,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnLogin:
-                if(!txtUser.getText().toString().isEmpty() && !txtPassword.getText().toString().isEmpty())
+                if(txtUser.getText().toString().isEmpty())
                 {
-                    loginWemailApassword(txtUser.getText().toString(), txtPassword.getText().toString());
+                    txtUser.setError("Field cannot be empty");
+
+                    return;
                 }
+                else if(txtPassword.getText().toString().isEmpty())
+                {
+                    txtPassword.setError("Field cannot be empty");
+                    return;
+                }
+                else{loginWemailApassword(txtUser.getText().toString(), txtPassword.getText().toString());}
                 break;
 
             case R.id.txtRegisterUsr:
