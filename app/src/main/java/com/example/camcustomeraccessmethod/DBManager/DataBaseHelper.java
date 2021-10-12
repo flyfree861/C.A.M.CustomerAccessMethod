@@ -11,7 +11,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     public DataBaseHelper(@Nullable Context context)
     {
-        super(context, "CAMCustomerAccesMethod.db", null, 1);
+        super(context, "CAMCustomerAccessMethod.db", null, 1);
     }
 
     @Override
