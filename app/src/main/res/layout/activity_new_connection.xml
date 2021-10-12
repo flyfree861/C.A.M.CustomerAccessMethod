@@ -144,6 +144,46 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lblNewConnTokenAPp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@null"
+                android:backgroundTintMode="@null"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/txtNameVpn"
+                android:singleLine="true"
+                android:textColorHint="@color/white"
+                app:boxBackgroundColor="@null"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/white"
+                app:counterTextColor="@color/white"
+                app:endIconMode="clear_text"
+                app:helperTextTextColor="@color/white"
+                app:hintAnimationEnabled="true"
+                app:hintTextColor="#FFFFFF"
+                app:passwordToggleTint="@color/white"
+                app:startIconDrawable="@drawable/ic_token">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNewConnTokenApp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Token app associated"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/txtNameVpn"
+                    android:singleLine="true"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lblNewConnUser"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -472,9 +512,10 @@
                     android:id="@+id/txtNewConnExpiredDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:editable="false"
                     android:hint="Expire date"
                     android:imeOptions="actionNext"
-                    android:inputType="date"
+                    android:inputType="none"
                     android:nextFocusDown="@+id/chkNewConnAdvExpireDate"
                     android:singleLine="true"
                     android:textColor="@color/white" />
@@ -491,7 +532,7 @@
                 android:textColor="@color/white" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnNewConnRegister"
+                android:id="@+id/btnNewConnRegisterData"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

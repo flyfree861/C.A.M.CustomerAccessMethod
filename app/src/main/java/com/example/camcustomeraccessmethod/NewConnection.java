@@ -1,6 +1,8 @@
 package com.example.camcustomeraccessmethod;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.util.Patterns;
@@ -9,50 +11,79 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 public class NewConnection extends AppCompatActivity
 {
-    TextInputEditText txtEmail, txtItEmail;
-    TextInputEditText factoryName;
+    TextInputEditText txtEmail, txtItEmail,factoryName, expireDate;
     MaterialButton btnRegistration;
+
+    @Override
+    public void onBackPressed()
+    {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit? the connection will not saved")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, id) -> NewConnection.super.onBackPressed())
+                .setNegativeButton("No", null)
+                .setIcon(R.drawable.ic_ques_mark)
+                .setTitle("Exit registration")
+                .show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_connection);
 
+        //UI Declaration
         factoryName = findViewById(R.id.txtNameFactory);
         txtEmail = findViewById(R.id.txtNewConnEmail);
         txtItEmail = findViewById(R.id.txtNewConnItMail);
-        btnRegistration = findViewById(R.id.btnNewConnRegister);
+        btnRegistration = findViewById(R.id.btnNewConnRegisterData);
+        expireDate = findViewById(R.id.txtNewConnExpiredDate);
 
-        btnRegistration.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+        //Data time picker constructor
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Select expire date");
+        final MaterialDatePicker materialDatePicker  = builder.build();
+
+
+        //UI Action
+
+        //Get data from calendar
+        expireDate.setOnClickListener(view -> materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER"));
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> expireDate.setText(materialDatePicker.getHeaderText()));
+        materialDatePicker.addOnNegativeButtonClickListener(view -> {
+            if (expireDate.getText().toString() == "")
             {
-                if(!CheckEmail())
-                {
-                    Toast.makeText(NewConnection.this, "Please check E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
-                    txtEmail.setError("Inserted email address wrongly please check and try again");
-                    return;
-                }
-
-                if (!CheckItEmail())
-                {
-                    Toast.makeText(NewConnection.this, "Please check It E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
-                    txtItEmail.setError("Inserted email address wrongly please check and try again");
-                    return;
-                }
-
+                expireDate.setText("");
             }
         });
 
+        //Add connection
+        btnRegistration.setOnClickListener(view ->
+        {
+            /*if(!CheckEmail())
+            {
+                Toast.makeText(NewConnection.this, "Please check E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
+                txtEmail.setError("Inserted email address wrongly please check and try again");
+                return;
+            }
 
+            if (!CheckItEmail())
+            {
+                Toast.makeText(NewConnection.this, "Please check It E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
+                txtItEmail.setError("Inserted email address wrongly please check and try again");
+                return;
+            }*/
 
+        });
 
     }
 

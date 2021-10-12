@@ -54,7 +54,11 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
+    //Moder user interface
     implementation 'com.google.android.material:material:1.4.0'
+
+    // Implementation of the AndroidX SQLite interfaces via the Android framework APIs.
+    implementation "androidx.sqlite:sqlite-framework:2.1.0"
 
 
 }
