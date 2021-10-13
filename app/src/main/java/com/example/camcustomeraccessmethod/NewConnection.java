@@ -4,12 +4,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.camcustomeraccessmethod.DBManager.DataBaseHelper;
+import com.example.camcustomeraccessmethod.Models.ConnectionModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -17,9 +21,26 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewConnection extends AppCompatActivity
 {
-    TextInputEditText txtEmail, txtItEmail,factoryName, expireDate;
+    TextInputEditText txtFacilityName,
+                      txtKindOfVpn,
+                      txtTokenAppAssociated,
+                      txtUserName,
+                      txtAccountId,
+                      txtRegisteredEmail,
+                      txtPassword,
+                      txtGeneralField1,
+                      txtGeneralField2,
+                      txtNote,
+                      txtItEmail,
+                      txtExpireDate;
+    CheckBox chkExpireDateAdvise;
+
+
     MaterialButton btnRegistration;
 
     @Override
@@ -42,11 +63,21 @@ public class NewConnection extends AppCompatActivity
         setContentView(R.layout.activity_new_connection);
 
         //UI Declaration
-        factoryName = findViewById(R.id.txtNameFactory);
-        txtEmail = findViewById(R.id.txtNewConnEmail);
+        txtFacilityName = findViewById(R.id.txtNameFactory);
+        txtKindOfVpn = findViewById(R.id.txtNewConnNameVpn);
+        txtTokenAppAssociated = findViewById(R.id.txtNewConnNameVpn);
+        txtUserName = findViewById(R.id.txtNewConnUser);
+        txtAccountId = findViewById(R.id.txtNewConnAccountId);
+        txtRegisteredEmail = findViewById(R.id.txtNewConnEmail);
+        txtPassword = findViewById(R.id.txtNewConnPassword);
+        txtGeneralField1 = findViewById(R.id.txtNewConnField1);
+        txtGeneralField2 = findViewById(R.id.txtNewConnField2);
+        txtNote = findViewById(R.id.txtNewConnNote);
         txtItEmail = findViewById(R.id.txtNewConnItMail);
+        txtExpireDate = findViewById(R.id.txtNewConnExpiredDate);
+        chkExpireDateAdvise = findViewById(R.id.chkNewConnAdvExpireDate);
         btnRegistration = findViewById(R.id.btnNewConnRegisterData);
-        expireDate = findViewById(R.id.txtNewConnExpiredDate);
+
 
         //Data time picker constructor
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
@@ -57,46 +88,83 @@ public class NewConnection extends AppCompatActivity
         //UI Action
 
         //Get data from calendar
-        expireDate.setOnClickListener(view -> materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER"));
-        materialDatePicker.addOnPositiveButtonClickListener(selection -> expireDate.setText(materialDatePicker.getHeaderText()));
+        txtExpireDate.setOnClickListener(view -> materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER"));
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> txtExpireDate.setText(materialDatePicker.getHeaderText()));
         materialDatePicker.addOnNegativeButtonClickListener(view -> {
-            if (expireDate.getText().toString() == "")
+            if (txtExpireDate.getText().toString() == "")
             {
-                expireDate.setText("");
+                txtExpireDate.setText("");
             }
         });
 
         //Add connection
         btnRegistration.setOnClickListener(view ->
         {
-            /*if(!CheckEmail())
+            if(FormCheck())
             {
-                Toast.makeText(NewConnection.this, "Please check E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
-                txtEmail.setError("Inserted email address wrongly please check and try again");
-                return;
+                ConnectionModel connectionModel = null;
+                Date date = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                try
+                {
+                    date = format.parse(txtExpireDate.getText().toString());
+                }
+                catch (Exception e){Toast.makeText(NewConnection.this, "failed date conversion attempt ", Toast.LENGTH_SHORT).show();}
+
+                try
+                {
+                    connectionModel = new ConnectionModel(txtFacilityName.getText().toString(),
+                            txtKindOfVpn.getText().toString(),
+                            txtTokenAppAssociated.getText().toString(),
+                            txtUserName.getText().toString(),
+                            txtAccountId.getText().toString(),
+                            txtRegisteredEmail.getText().toString(),
+                            txtPassword.getText().toString(),
+                            txtGeneralField1.getText().toString(),
+                            txtGeneralField2.getText().toString(),
+                            txtNote.getText().toString(),
+                            txtItEmail.getText().toString(),
+                            date.toString(),
+                            String.valueOf(chkExpireDateAdvise.isChecked()));
+                }
+                catch (Exception exception)
+                {
+                    Toast.makeText(NewConnection.this, exception.toString(), Toast.LENGTH_LONG).show();
+                }
+
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(NewConnection.this);
+                boolean result = dataBaseHelper.addNewConnection(connectionModel);
+                if(result)
+                {
+                    Toast.makeText(NewConnection.this, "New connection successfully saved", Toast.LENGTH_LONG).show();
+                }
             }
 
-            if (!CheckItEmail())
-            {
-                Toast.makeText(NewConnection.this, "Please check It E-Mail field, probably the email address has been inserted wrongly", Toast.LENGTH_LONG).show();
-                txtItEmail.setError("Inserted email address wrongly please check and try again");
-                return;
-            }*/
+            else
+                {
+                    Toast.makeText(NewConnection.this, "The form was not filled in correctly", Toast.LENGTH_SHORT).show();
+                }
 
         });
 
     }
 
-    private boolean CheckEmail()
+    private boolean FormCheck()
     {
-        boolean email = Patterns.EMAIL_ADDRESS.matcher(txtEmail.getText().toString()).matches();
+        if(txtFacilityName.toString().isEmpty() &&  txtKindOfVpn.toString().isEmpty())
+        {return false;}
+        else{return true;}
+
+    }
+
+    // check email if is not EMAIL
+    private boolean CheckEmail(String Email)
+    {
+        boolean email = Patterns.EMAIL_ADDRESS.matcher(Email).matches();
         return email;
-
     }
 
-    private boolean CheckItEmail()
-    {
-        boolean itEmail = Patterns.EMAIL_ADDRESS.matcher(txtItEmail.getText().toString()).matches();
-        return itEmail;
-    }
+
+
+
 }

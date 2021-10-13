@@ -296,6 +296,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         Toast.makeText(MainActivity.this, "Login with success", Toast.LENGTH_LONG).show();
                         mAuth.signOut();
+                        Intent intent = new Intent(MainActivity.this, MainMenu.class);
+                        startActivity(intent);
+
                     }
 
 

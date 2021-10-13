@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class ConnectionModel
 {
-    private int id;
-    private String factoryName;
+    private String facilityName;
     private String kindOfVpn;
     private String tokenAppAssociated;
     private String userName;
@@ -16,13 +15,12 @@ public class ConnectionModel
     private String getGeneralField2;
     private String note;
     private String itEmail;
-    private Date expireDate;
-    private Boolean expireDateAdvise;
+    private String expireDate;
+    private String expireDateAdvise;
 
-    public ConnectionModel(int id, String factoryName, String kindOfVpn, String tokenAppAssociated, String userName, String accountId, String registeredEmail, String password, String generalField1, String getGeneralField2, String note, String itEmail, Date expireDate, Boolean expireDateAdvise)
+    public ConnectionModel(String facilityName, String kindOfVpn, String tokenAppAssociated, String userName, String accountId, String registeredEmail, String password, String generalField1, String getGeneralField2, String note, String itEmail, String expireDate, String expireDateAdvise)
     {
-        this.id = id;
-        this.factoryName = factoryName;
+        this.facilityName = facilityName;
         this.kindOfVpn = kindOfVpn;
         this.tokenAppAssociated = tokenAppAssociated;
         this.userName = userName;
@@ -44,9 +42,7 @@ public class ConnectionModel
     @Override
     public String toString()
     {
-        return "ConnectionModel{" +
-                "id=" + id +
-                ", factoryName='" + factoryName + '\'' +
+        return "ConnectionModel{facilityName='" + facilityName + '\'' +
                 ", kindOfVpn='" + kindOfVpn + '\'' +
                 ", tokenAppAssociated='" + tokenAppAssociated + '\'' +
                 ", userName='" + userName + '\'' +
@@ -62,24 +58,15 @@ public class ConnectionModel
                 '}';
     }
 
-    public int getId()
+
+    public String getFacilityName()
     {
-        return id;
+        return facilityName;
     }
 
-    public void setId(int id)
+    public void setFacilityNam(String facilityName)
     {
-        this.id = id;
-    }
-
-    public String getFactoryName()
-    {
-        return factoryName;
-    }
-
-    public void setFactoryName(String factoryName)
-    {
-        this.factoryName = factoryName;
+        this.facilityName = facilityName;
     }
 
     public String getKindOfVpn()
@@ -97,10 +84,7 @@ public class ConnectionModel
         return tokenAppAssociated;
     }
 
-    public void setTokenAppAssociated(String tokenAppAssociated)
-    {
-        this.tokenAppAssociated = tokenAppAssociated;
-    }
+    public void setTokenAppAssociated(String tokenAppAssociated){this.tokenAppAssociated = tokenAppAssociated;}
 
     public String getUserName()
     {
@@ -127,10 +111,7 @@ public class ConnectionModel
         return registeredEmail;
     }
 
-    public void setRegisteredEmail(String registeredEmail)
-    {
-        this.registeredEmail = registeredEmail;
-    }
+    public void setRegisteredEmail(String registeredEmail){this.registeredEmail = registeredEmail;}
 
     public String getPassword()
     {
@@ -157,10 +138,7 @@ public class ConnectionModel
         return getGeneralField2;
     }
 
-    public void setGetGeneralField2(String getGeneralField2)
-    {
-        this.getGeneralField2 = getGeneralField2;
-    }
+    public void setGetGeneralField2(String getGeneralField2) {this.getGeneralField2 = getGeneralField2;}
 
     public String getNote()
     {
@@ -182,25 +160,22 @@ public class ConnectionModel
         this.itEmail = itEmail;
     }
 
-    public Date getExpireDate()
+    public String getExpireDate()
     {
         return expireDate;
     }
 
-    public void setExpireDate(Date expireDate)
+    public void setExpireDate(String expireDate)
     {
         this.expireDate = expireDate;
     }
 
-    public Boolean getExpireDateAdvise()
+    public String getExpireDateAdvise()
     {
         return expireDateAdvise;
     }
 
-    public void setExpireDateAdvise(Boolean expireDateAdvise)
-    {
-        this.expireDateAdvise = expireDateAdvise;
-    }
+    public void setExpireDateAdvise(String expireDateAdvise){this.expireDateAdvise = expireDateAdvise;}
 
 
 }
