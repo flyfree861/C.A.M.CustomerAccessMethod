@@ -540,7 +540,6 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="@font/poppins"
-                android:imeOptions="actionDone"
                 android:text="Add Connection"
                 android:textColor="#FFFFFF"
                 android:textColorLink="#FFFFFF"

@@ -2,12 +2,16 @@ package com.example.camcustomeraccessmethod.DBManager;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.camcustomeraccessmethod.Models.ConnectionModel;
+import com.example.camcustomeraccessmethod.NewConnection;
 
 public class DataBaseHelper extends SQLiteOpenHelper
 {
@@ -37,20 +41,20 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase sqLiteDatabase)
     {
       String CreateTableConnection = "CREATE TABLE IF NOT EXISTS " + TABLE_CONNECTION + "("
-                                   + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                   + COLUMN_FACILITY_NAME + " TEXT, "
-                                   + COLUMN_KIND_OF_VPN + " TEXT, "
-                                   + COLUMN_TOKEN_APP + " TEXT, "
-                                   + COLUMN_USER_NAME + "TEXT, "
-                                   + COLUMN_ACCOUNT_ID + " TEXT, "
-                                   + COLUMN_REGISTERED_EMAIL + ", "
-                                   + COLUMN_PASSWORD + " TEXT, "
-                                   + COLUMN_GENERAL_FIELD_1 + " TEXT, "
-                                   + COLUMN_GENERAL_FIELD_2 + " TEXT, "
-                                   + COLUMN_NOTE + " TEXT, "
-                                   + COLUMN_EMAIL_IT + " TEXT, "
-                                   + COLUMN_EXPIRE_DATE + " TEXT, "
-                                   + COLUMN_ADV_EXPIRE_DATE + " TEXT )";
+                                   + COLUMN_ID                     + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                   + COLUMN_FACILITY_NAME          + " TEXT, "
+                                   + COLUMN_KIND_OF_VPN            + " TEXT, "
+                                   + COLUMN_TOKEN_APP              + " TEXT, "
+                                   + COLUMN_USER_NAME              + " TEXT, "
+                                   + COLUMN_ACCOUNT_ID             + " TEXT, "
+                                   + COLUMN_REGISTERED_EMAIL       + " TEXT, "
+                                   + COLUMN_PASSWORD               + " TEXT, "
+                                   + COLUMN_GENERAL_FIELD_1        + " TEXT, "
+                                   + COLUMN_GENERAL_FIELD_2        + " TEXT, "
+                                   + COLUMN_NOTE                   + " TEXT, "
+                                   + COLUMN_EMAIL_IT               + " TEXT, "
+                                   + COLUMN_EXPIRE_DATE            + " TEXT, "
+                                   + COLUMN_ADV_EXPIRE_DATE        + " TEXT )";
       sqLiteDatabase.execSQL(CreateTableConnection);
     }
 
@@ -60,9 +64,10 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     }
 
-    public boolean addNewConnection(ConnectionModel connectionModel)
+    public DbAnswerManager addNewConnection(ConnectionModel connectionModel)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        DbAnswerManager dbAnswerManager = new DbAnswerManager();
+
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_FACILITY_NAME, connectionModel.getFacilityName());
@@ -78,11 +83,67 @@ public class DataBaseHelper extends SQLiteOpenHelper
         cv.put(COLUMN_EMAIL_IT,         connectionModel.getItEmail());
         cv.put(COLUMN_EXPIRE_DATE,      connectionModel.getExpireDate().toString());
         cv.put(COLUMN_ADV_EXPIRE_DATE,  connectionModel.getExpireDateAdvise());
+        long insertResult=0;
+        if(!CheckIfConnectionExist(TABLE_CONNECTION,"Facility_Name","Kind_of_Vpn",connectionModel.getFacilityName(),
+                                    connectionModel.getKindOfVpn()))
+        {
+            SQLiteDatabase db = this.getWritableDatabase();
+            insertResult = db.insert(TABLE_CONNECTION, null, cv);
+            db.close();
+        }
+        else
+            {
+                dbAnswerManager.setAnswer("Field already exist");
+                dbAnswerManager.setResult(false);
+              return dbAnswerManager;
+            }
 
-        long insertResult = db.insert(TABLE_CONNECTION, null, cv);
 
-        if(insertResult == -1){return false;}
+        if(insertResult == -1)
+        {
+            dbAnswerManager.setAnswer("Query failed");
+            dbAnswerManager.setResult(false);
+            return dbAnswerManager;
+        }
 
-        else {return true;}
+        else
+            {
+                dbAnswerManager.setAnswer("New connection successfully saved");
+                dbAnswerManager.setResult(true);
+                return dbAnswerManager;
+            }
+    }
+
+    public boolean CheckIfConnectionExist(String tableName,
+                                          String column,
+                                          String column2,
+                                          String facilityName,
+                                          String kindOfVpn )
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+
+        String sql ="SELECT * FROM '"+tableName+"' WHERE ('"+column+"'='"
+                +facilityName+"' AND '"
+                +column2+"'='"
+                +kindOfVpn+"');";
+
+
+        cursor= db.rawQuery(sql,null);
+
+        if(cursor.getCount()>0)
+        {
+            cursor.close();
+            db.close();
+            return true;
+
+        }
+        else
+        {
+            cursor.close();
+            db.close();
+            return false;
+        }
+
     }
 }

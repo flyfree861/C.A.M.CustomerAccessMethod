@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.camcustomeraccessmethod.DBManager.DataBaseHelper;
+import com.example.camcustomeraccessmethod.DBManager.DbAnswerManager;
 import com.example.camcustomeraccessmethod.Models.ConnectionModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -22,7 +23,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class NewConnection extends AppCompatActivity
 {
@@ -80,74 +83,98 @@ public class NewConnection extends AppCompatActivity
 
 
         //Data time picker constructor
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat formatPickerDate = new SimpleDateFormat("dd/MM/yyyy");
+        calendar.clear();
+        final long today = MaterialDatePicker.todayInUtcMilliseconds();
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-        builder.setTitleText("Select expire date");
-        final MaterialDatePicker materialDatePicker  = builder.build();
-
-
+        builder.setTitleText("Select expire date")
+                .setSelection(today);
+        final MaterialDatePicker materialDatePicker = builder.build();
         //UI Action
 
         //Get data from calendar
-        txtExpireDate.setOnClickListener(view -> materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER"));
-        materialDatePicker.addOnPositiveButtonClickListener(selection -> txtExpireDate.setText(materialDatePicker.getHeaderText()));
-        materialDatePicker.addOnNegativeButtonClickListener(view -> {
-            if (txtExpireDate.getText().toString() == "")
+        txtExpireDate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
             {
-                txtExpireDate.setText("");
+                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+            }
+        });
+
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener()
+        {
+            @Override
+            public void onPositiveButtonClick(Object selection)
+            {
+                txtExpireDate.setText(formatPickerDate.format(materialDatePicker.getSelection()));
+            }
+        });
+
+        materialDatePicker.addOnNegativeButtonClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if (txtExpireDate.getText().toString() == "")
+                {
+                    txtExpireDate.setText("");
+                }
             }
         });
 
         //Add connection
-        btnRegistration.setOnClickListener(view ->
+        btnRegistration.setOnClickListener(new View.OnClickListener()
         {
-            if(FormCheck())
+            @Override
+            public void onClick(View view)
             {
-                ConnectionModel connectionModel = null;
-                Date date = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                try
+                if (FormCheck())
                 {
-                    date = format.parse(txtExpireDate.getText().toString());
-                }
-                catch (Exception e){Toast.makeText(NewConnection.this, "failed date conversion attempt ", Toast.LENGTH_SHORT).show();}
+                    ConnectionModel connectionModel = null;
+                    try
+                    {
+                        connectionModel = new ConnectionModel(txtFacilityName.getText().toString(),
+                                txtKindOfVpn.getText().toString(),
+                                txtTokenAppAssociated.getText().toString(),
+                                txtUserName.getText().toString(),
+                                txtAccountId.getText().toString(),
+                                txtRegisteredEmail.getText().toString(),
+                                txtPassword.getText().toString(),
+                                txtGeneralField1.getText().toString(),
+                                txtGeneralField2.getText().toString(),
+                                txtNote.getText().toString(),
+                                txtItEmail.getText().toString(),
+                                txtExpireDate.getText().toString(),
+                                String.valueOf(chkExpireDateAdvise.isChecked()));
+                    }
+                    catch (Exception exception)
+                    {
+                        Toast.makeText(NewConnection.this, exception.toString(), Toast.LENGTH_LONG).show();
+                    }
 
-                try
-                {
-                    connectionModel = new ConnectionModel(txtFacilityName.getText().toString(),
-                            txtKindOfVpn.getText().toString(),
-                            txtTokenAppAssociated.getText().toString(),
-                            txtUserName.getText().toString(),
-                            txtAccountId.getText().toString(),
-                            txtRegisteredEmail.getText().toString(),
-                            txtPassword.getText().toString(),
-                            txtGeneralField1.getText().toString(),
-                            txtGeneralField2.getText().toString(),
-                            txtNote.getText().toString(),
-                            txtItEmail.getText().toString(),
-                            date.toString(),
-                            String.valueOf(chkExpireDateAdvise.isChecked()));
-                }
-                catch (Exception exception)
-                {
-                    Toast.makeText(NewConnection.this, exception.toString(), Toast.LENGTH_LONG).show();
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(NewConnection.this);
+                    DbAnswerManager result = dataBaseHelper.addNewConnection(connectionModel);
+                    if (result.isResult())
+                    {
+                        Toast.makeText(NewConnection.this, result.getAnswer(), Toast.LENGTH_LONG).show();
+                    }
                 }
 
-                DataBaseHelper dataBaseHelper = new DataBaseHelper(NewConnection.this);
-                boolean result = dataBaseHelper.addNewConnection(connectionModel);
-                if(result)
-                {
-                    Toast.makeText(NewConnection.this, "New connection successfully saved", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            else
+                else
                 {
                     Toast.makeText(NewConnection.this, "The form was not filled in correctly", Toast.LENGTH_SHORT).show();
                 }
 
+
+            }
         });
 
+
     }
+
 
     private boolean FormCheck()
     {
