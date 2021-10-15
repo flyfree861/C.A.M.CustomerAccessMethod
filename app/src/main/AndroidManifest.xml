@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CAMCustomerAccessMethod">
         <activity
+            android:name=".ShowConnection"
+            android:exported="true" />
+        <activity
             android:name=".NewConnection"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainMenu"
             android:exported="true"
