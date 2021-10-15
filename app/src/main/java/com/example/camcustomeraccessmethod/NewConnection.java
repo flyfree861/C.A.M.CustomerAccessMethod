@@ -68,7 +68,7 @@ public class NewConnection extends AppCompatActivity
         //UI Declaration
         txtFacilityName = findViewById(R.id.txtNameFactory);
         txtKindOfVpn = findViewById(R.id.txtNewConnNameVpn);
-        txtTokenAppAssociated = findViewById(R.id.txtNewConnNameVpn);
+        txtTokenAppAssociated = findViewById(R.id.txtNewConnTokenApp);
         txtUserName = findViewById(R.id.txtNewConnUser);
         txtAccountId = findViewById(R.id.txtNewConnAccountId);
         txtRegisteredEmail = findViewById(R.id.txtNewConnEmail);
@@ -99,7 +99,10 @@ public class NewConnection extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+                if(!materialDatePicker.isAdded())
+                {
+                    materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+                }
             }
         });
 
@@ -157,10 +160,7 @@ public class NewConnection extends AppCompatActivity
 
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(NewConnection.this);
                     DbAnswerManager result = dataBaseHelper.addNewConnection(connectionModel);
-                    if (result.isResult())
-                    {
-                        Toast.makeText(NewConnection.this, result.getAnswer(), Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(NewConnection.this, result.getAnswer(), Toast.LENGTH_LONG).show();
                 }
 
                 else

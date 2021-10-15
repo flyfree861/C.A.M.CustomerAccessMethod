@@ -84,19 +84,18 @@ public class DataBaseHelper extends SQLiteOpenHelper
         cv.put(COLUMN_EXPIRE_DATE,      connectionModel.getExpireDate().toString());
         cv.put(COLUMN_ADV_EXPIRE_DATE,  connectionModel.getExpireDateAdvise());
         long insertResult=0;
-        if(!CheckIfConnectionExist(TABLE_CONNECTION,"Facility_Name","Kind_of_Vpn",connectionModel.getFacilityName(),
-                                    connectionModel.getKindOfVpn()))
+        if(!CheckIfConnectionExist(TABLE_CONNECTION,"Facility_Name","Kind_of_Vpn",connectionModel.getFacilityName(), connectionModel.getKindOfVpn()))
         {
             SQLiteDatabase db = this.getWritableDatabase();
             insertResult = db.insert(TABLE_CONNECTION, null, cv);
             db.close();
         }
         else
-            {
-                dbAnswerManager.setAnswer("Field already exist");
-                dbAnswerManager.setResult(false);
-              return dbAnswerManager;
-            }
+        {
+            dbAnswerManager.setAnswer("This connection already exist");
+            dbAnswerManager.setResult(false);
+            return dbAnswerManager;
+        }
 
 
         if(insertResult == -1)
@@ -121,12 +120,9 @@ public class DataBaseHelper extends SQLiteOpenHelper
                                           String kindOfVpn )
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
+        Cursor cursor = null;
 
-        String sql ="SELECT * FROM '"+tableName+"' WHERE ('"+column+"'='"
-                +facilityName+"' AND '"
-                +column2+"'='"
-                +kindOfVpn+"');";
+        String sql ="SELECT * From '"+tableName+"' Where "+column+" = '"+ facilityName +"' AND "+column2+" = '"+ kindOfVpn +"';";
 
 
         cursor= db.rawQuery(sql,null);
