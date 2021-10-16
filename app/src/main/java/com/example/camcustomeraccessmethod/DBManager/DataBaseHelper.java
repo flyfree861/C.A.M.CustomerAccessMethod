@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import com.example.camcustomeraccessmethod.Models.ConnectionModel;
 import com.example.camcustomeraccessmethod.NewConnection;
 
+import java.util.List;
+
 public class DataBaseHelper extends SQLiteOpenHelper
 {
 
@@ -111,6 +113,23 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 dbAnswerManager.setResult(true);
                 return dbAnswerManager;
             }
+    }
+
+    public List<ConnectionModel> getAllConnection()
+    {
+        List<ConnectionModel> allConnection = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql ="SELECT * From "+TABLE_CONNECTION+";";
+        Cursor cursorCourses = db.rawQuery(sql, null);
+
+        if (cursorCourses.moveToFirst()) {
+            do {
+                // on below line we are adding the data from cursor to our array list.
+                allConnection.add(cursorCourses)
+            } while (cursorCourses.moveToNext());
+            // moving our cursor to next.
+
+        return allConnection;
     }
 
     public boolean CheckIfConnectionExist(String tableName,
