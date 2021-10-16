@@ -24,9 +24,20 @@ public class MainMenu extends AppCompatActivity
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
         btnShowConn = findViewById(R.id.btnMainMenuShowConnection);
 
-        btnNewConn.setOnClickListener(view -> {
+        btnNewConn.setOnClickListener(view ->
+        {
             Intent in = new Intent(MainMenu.this, NewConnection.class);
             startActivity(in);
+        });
+
+        btnShowConn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent in = new Intent(MainMenu.this,ShowConnection.class);
+                startActivity(in);
+            }
         });
     }
 }

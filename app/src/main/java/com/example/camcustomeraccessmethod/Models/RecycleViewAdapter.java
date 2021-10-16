@@ -28,7 +28,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     CircleImageView icon;
     LayoutInflater inflater;
 
-    public RecycleViewAdapter(Context appContext, List connectionModel, CircleImageView icon)
+    public RecycleViewAdapter(Context appContext, List connectionModel)
     {
         this.context = appContext;
         this.connectionModel = connectionModel;
@@ -56,7 +56,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public int getItemCount()
     {
-        return connectionModel.size();
+        if(connectionModel.size() > 0)
+        {
+            return connectionModel.size();
+        }
+
+        return 0;
+
     }
 
 

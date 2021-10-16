@@ -117,19 +117,21 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     public List<ConnectionModel> getAllConnection()
     {
-        List<ConnectionModel> allConnection = null;
+        ConnectionModel cm  = new ConnectionModel();
+        List<ConnectionModel> listConnection = null;
         SQLiteDatabase db = this.getReadableDatabase();
         String sql ="SELECT * From "+TABLE_CONNECTION+";";
-        Cursor cursorCourses = db.rawQuery(sql, null);
 
-        if (cursorCourses.moveToFirst()) {
-            do {
-                // on below line we are adding the data from cursor to our array list.
-                allConnection.add(cursorCourses)
-            } while (cursorCourses.moveToNext());
-            // moving our cursor to next.
-
-        return allConnection;
+        Cursor cursor = db.rawQuery(sql,null);
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false)
+        {
+            cm.setFacilityNam(cursor.getString(1));
+            cm.setKindOfVpn(cursor.getString(2));
+            listConnection.add(cm);
+        }
+        cursor.moveToNext();
+        return listConnection;
     }
 
     public boolean CheckIfConnectionExist(String tableName,
