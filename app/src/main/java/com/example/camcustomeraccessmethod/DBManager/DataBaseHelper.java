@@ -126,8 +126,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
         cursor.moveToFirst();
         while (cursor.isAfterLast() == false)
         {
-            cm.setFacilityNam(cursor.getString(1));
-            cm.setKindOfVpn(cursor.getString(2));
+            cm.setFacilityNam(cursor.isNull(1)? null : cursor.getString(1));
+            cm.setKindOfVpn(cursor.isNull(2)? null : cursor.getString(2));
             listConnection.add(cm);
         }
         cursor.moveToNext();
