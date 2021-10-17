@@ -13,11 +13,12 @@ import androidx.annotation.Nullable;
 import com.example.camcustomeraccessmethod.Models.ConnectionModel;
 import com.example.camcustomeraccessmethod.NewConnection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper
 {
-
+    List<ConnectionModel> listConnection = new ArrayList<>();
     public static final String COLUMN_FACILITY_NAME         = "Facility_Name";
     public static final String COLUMN_KIND_OF_VPN           = "Kind_of_Vpn";
     public static final String COLUMN_TOKEN_APP             = "Token_App";
@@ -117,20 +118,37 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     public List<ConnectionModel> getAllConnection()
     {
-        ConnectionModel cm  = new ConnectionModel();
-        List<ConnectionModel> listConnection = null;
+
         SQLiteDatabase db = this.getReadableDatabase();
         String sql ="SELECT * From "+TABLE_CONNECTION+";";
-
         Cursor cursor = db.rawQuery(sql,null);
         cursor.moveToFirst();
-        while (cursor.isAfterLast() == false)
+        List<ConnectionModel> listConnection = new ArrayList<>();
+        if (cursor.moveToFirst())
         {
-            cm.setFacilityNam(cursor.isNull(1)? null : cursor.getString(1));
-            cm.setKindOfVpn(cursor.isNull(2)? null : cursor.getString(2));
-            listConnection.add(cm);
+            do
+                {
+                    ConnectionModel cm  = new ConnectionModel();
+                    cm.setFacilityNam                   (cursor.isNull(1)? null : cursor.getString(1));
+                    cm.setKindOfVpn                     (cursor.isNull(2)? null : cursor.getString(2));
+                    cm.setTokenAppAssociated            (cursor.isNull(3)? null : cursor.getString(3));
+                    cm.setUserName                      (cursor.isNull(4)? null : cursor.getString(4));
+                    cm.setAccountId                     (cursor.isNull(5)? null : cursor.getString(5));
+                    cm.setRegisteredEmail               (cursor.isNull(6)? null : cursor.getString(6));
+                    cm.setPassword                      (cursor.isNull(7)? null : cursor.getString(7));
+                    cm.setGeneralField1                 (cursor.isNull(8)? null : cursor.getString(8));
+                    cm.setGetGeneralField2              (cursor.isNull(9)? null : cursor.getString(9));
+                    cm.setNote                          (cursor.isNull(10)? null : cursor.getString(10));
+                    cm.setItEmail                       (cursor.isNull(11)? null : cursor.getString(11));
+                    cm.setExpireDate                    (cursor.isNull(12)? null : cursor.getString(12));
+                    cm.setExpireDateAdvise              (cursor.isNull(13)? null : cursor.getString(13));
+                    listConnection.add(cm);
+                // do what you need with the cursor here
+            }
+
+            while (cursor.moveToNext());
+
         }
-        cursor.moveToNext();
         return listConnection;
     }
 
