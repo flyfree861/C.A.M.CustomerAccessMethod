@@ -18,8 +18,8 @@ import java.util.List;
 
 public class ShowConnection extends AppCompatActivity
 {
-    RecyclerView recyclerView;
     List<ConnectionModel> connectionModelsList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,19 +27,16 @@ public class ShowConnection extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_connection);
 
-
         RecyclerView listview = findViewById(R.id.layoutRecycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager((getApplicationContext()));
         listview.setLayoutManager(linearLayoutManager);
 
         DataBaseHelper db = new DataBaseHelper(this);
-
         connectionModelsList = db.getAllConnection();
-
 
         try
         {
-            if (connectionModelsList != null)
+            if (connectionModelsList.size() != 0)
             {
                 RecycleViewAdapter connectionAdapter = new RecycleViewAdapter(getApplicationContext(), connectionModelsList);
                 listview.setAdapter(connectionAdapter);
@@ -70,11 +67,9 @@ public class ShowConnection extends AppCompatActivity
         catch (Exception exception)
         {
             Toast.makeText(ShowConnection.this, exception.toString(), Toast.LENGTH_LONG).show();
-
-
-
         }
 
-
     }
+
+
 }

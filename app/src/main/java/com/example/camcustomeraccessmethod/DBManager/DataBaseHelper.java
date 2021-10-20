@@ -100,7 +100,6 @@ public class DataBaseHelper extends SQLiteOpenHelper
             return dbAnswerManager;
         }
 
-
         if(insertResult == -1)
         {
             dbAnswerManager.setAnswer("Query failed");
@@ -152,18 +151,12 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return listConnection;
     }
 
-    public boolean CheckIfConnectionExist(String tableName,
-                                          String column,
-                                          String column2,
-                                          String facilityName,
-                                          String kindOfVpn )
+    public boolean CheckIfConnectionExist(String tableName, String column, String column2, String facilityName, String kindOfVpn )
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
 
         String sql ="SELECT * From '"+tableName+"' Where "+column+" = '"+ facilityName +"' AND "+column2+" = '"+ kindOfVpn +"';";
-
-
         cursor= db.rawQuery(sql,null);
 
         if(cursor.getCount()>0)
@@ -179,6 +172,37 @@ public class DataBaseHelper extends SQLiteOpenHelper
             db.close();
             return false;
         }
+
+    }
+
+    public boolean deleteConnection(String connection, String kindVpn)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "";
+        //Se ho tutti i campi
+        if (!connection.isEmpty() && !kindVpn.isEmpty())
+        {
+            String queryToUse =  COLUMN_FACILITY_NAME+"='"+connection+"' AND "+COLUMN_KIND_OF_VPN+" = '"+kindVpn+"'" ;
+            query = queryToUse;
+        }
+
+        //Se ho solo il campo connection
+        else if (!connection.isEmpty() && kindVpn.isEmpty())
+        {
+            String queryToUse =  COLUMN_FACILITY_NAME+"='"+connection+"'" ;
+            query = queryToUse;
+        }
+
+        //Se ho solo il campo Kind of VPN
+        else if (connection.isEmpty() && !kindVpn.isEmpty())
+        {
+            String queryToUse =  COLUMN_KIND_OF_VPN+"='"+kindVpn+"'" ;
+            query = queryToUse;
+        }
+
+        if(db.delete(TABLE_CONNECTION, query,null) > 0)
+        { return true;}
+        else{ return false;}
 
     }
 }

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShowConnection"
-    android:background="@drawable/bg_main_gradient">
+    android:background="@drawable/bg_main_gradient"
+    android:id="@+id/layoutShowConnection">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/layoutRecycleView"
