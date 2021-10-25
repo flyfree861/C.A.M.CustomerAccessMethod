@@ -16,7 +16,6 @@
         android:id="@+id/btnExpireCardModify"
         android:layout_width="150dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/layou_round"
         android:scaleType="centerInside"
         android:scaleX="1"
@@ -24,7 +23,9 @@
         android:src="@android:drawable/ic_menu_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/CircleShowConnImg"

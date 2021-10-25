@@ -78,19 +78,6 @@ public class RecycleViewAdapterExpiredDate extends RecyclerView.Adapter<RecycleV
             {
                 Intent intent = new Intent(view.getContext(), RegistrationActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("facilityName",    (connectionModel.get(position).getFacilityName()       == "") ? "Empty" : connectionModel.get(position).getFacilityName());
-                intent.putExtra("kindVpn",         (connectionModel.get(position).getKindOfVpn()          == "") ? "Empty" : connectionModel.get(position).getKindOfVpn());
-                intent.putExtra("tokenApp",        (connectionModel.get(position).getTokenAppAssociated() == "") ? "Empty" : connectionModel.get(position).getTokenAppAssociated());
-                intent.putExtra("userName",        (connectionModel.get(position).getUserName()           == "") ? "Empty" : connectionModel.get(position).getUserName());
-                intent.putExtra("accountId",       (connectionModel.get(position).getAccountId()          == "") ? "Empty" : connectionModel.get(position).getAccountId());
-                intent.putExtra("registeredEmail", (connectionModel.get(position).getRegisteredEmail()    == "") ? "Empty" : connectionModel.get(position).getRegisteredEmail());
-                intent.putExtra("password",        (connectionModel.get(position).getPassword()           == "") ? "Empty" : connectionModel.get(position).getPassword());
-                intent.putExtra("generalField1",   (connectionModel.get(position).getGeneralField1()      == "") ? "Empty" : connectionModel.get(position).getGeneralField1());
-                intent.putExtra("generalField2",   (connectionModel.get(position).getGetGeneralField2()   == "") ? "Empty" : connectionModel.get(position).getGetGeneralField2());
-                intent.putExtra("note",            (connectionModel.get(position).getNote()               == "") ? "Empty" : connectionModel.get(position).getNote());
-                intent.putExtra("itMail",          (connectionModel.get(position).getItEmail()            == "") ? "Empty" : connectionModel.get(position).getItEmail());
-                intent.putExtra("expireDate",      (connectionModel.get(position).getExpireDate()         == "") ? "Empty" : connectionModel.get(position).getExpireDate());
-                context.startActivity(intent);
             }
         });
     }

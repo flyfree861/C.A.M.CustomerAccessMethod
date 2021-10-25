@@ -16,7 +16,6 @@
         android:id="@+id/btnCardListShow"
         android:layout_width="33dp"
         android:layout_height="29dp"
-        android:layout_marginBottom="16dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
         android:scaleX="1"
@@ -25,13 +24,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintHorizontal_bias="0.109"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="33dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="12dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
         android:scaleX="1"
@@ -39,14 +39,16 @@
         android:src="@android:drawable/ic_menu_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
 
     <ImageButton
         android:id="@+id/btnCardListDelete"
         android:layout_width="39dp"
         android:layout_height="29dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
         android:scaleX="1"
@@ -55,7 +57,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/CircleShowConnImg"

@@ -68,6 +68,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     }
 
+    //Query insert new connection
     public DbAnswerManager addNewConnection(ConnectionModel connectionModel)
     {
         DbAnswerManager dbAnswerManager = new DbAnswerManager();
@@ -205,6 +206,31 @@ public class DataBaseHelper extends SQLiteOpenHelper
         if(db.delete(TABLE_CONNECTION, query,null) > 0)
         { return true;}
         else{ return false;}
+
+    }
+
+    public boolean updateConnection(ConnectionModel connectionModel, String column, String field)
+    {
+        String query= "SET"+COLUMN_EXPIRE_DATE+" WHERE "+column+"='"+field+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_FACILITY_NAME,    connectionModel.getFacilityName());
+        cv.put(COLUMN_KIND_OF_VPN,      connectionModel.getKindOfVpn());
+        cv.put(COLUMN_TOKEN_APP,        connectionModel.getTokenAppAssociated());
+        cv.put(COLUMN_USER_NAME,        connectionModel.getUserName());
+        cv.put(COLUMN_ACCOUNT_ID,       connectionModel.getAccountId());
+        cv.put(COLUMN_REGISTERED_EMAIL, connectionModel.getRegisteredEmail());
+        cv.put(COLUMN_PASSWORD,         connectionModel.getPassword());
+        cv.put(COLUMN_GENERAL_FIELD_1,  connectionModel.getGeneralField1());
+        cv.put(COLUMN_GENERAL_FIELD_2,  connectionModel.getGetGeneralField2());
+        cv.put(COLUMN_NOTE,             connectionModel.getNote());
+        cv.put(COLUMN_EMAIL_IT,         connectionModel.getItEmail());
+        cv.put(COLUMN_EXPIRE_DATE,      connectionModel.getExpireDate().toString());
+        cv.put(COLUMN_ADV_EXPIRE_DATE,  connectionModel.getExpireDateAdvise());
+        long updateResult;
+
+        updateResult = db.update(TABLE_CONNECTION,cv, query,null);
+        if(updateResult != )
 
     }
 }

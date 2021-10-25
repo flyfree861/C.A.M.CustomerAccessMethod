@@ -25,12 +25,15 @@
 
     <ImageView
         android:id="@+id/tltImage"
-        android:layout_gravity="center"
         android:layout_width="90dp"
         android:layout_height="105dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_cam" />
+        android:layout_gravity="center"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        android:src="@drawable/ic_cam"
+        android:tint="#FFFFFF" />
 
 
 
@@ -63,6 +66,7 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:startIconTint="@color/white"
             app:endIconMode="clear_text"
             app:boxBackgroundColor="@null"
             app:boxBackgroundMode="outline"
@@ -84,10 +88,12 @@
                 android:id="@+id/txtMainUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:drawableTint="#FFFFFF"
+                android:foregroundTint="#FFFFFF"
                 android:hint="Email address"
-                app:boxStrokeErrorColor="@color/error"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/white"
+                app:boxStrokeErrorColor="@color/error"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="22dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -104,6 +110,8 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:startIconTint="@color/white"
+            app:endIconTint="@color/white"
             app:helperText="Required minimum 8*"
             app:helperTextTextColor="@color/white"
             app:endIconMode="password_toggle"

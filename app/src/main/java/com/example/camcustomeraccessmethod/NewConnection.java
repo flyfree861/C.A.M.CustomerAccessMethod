@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
@@ -178,8 +179,12 @@ public class NewConnection extends AppCompatActivity
 
     private boolean FormCheck()
     {
-        if(txtFacilityName.toString().isEmpty() &&  txtKindOfVpn.toString().isEmpty())
-        {return false;}
+        if(TextUtils.isEmpty(txtFacilityName.getText())  &&  TextUtils.isEmpty(txtKindOfVpn.getText()))
+        {
+            txtFacilityName.setError("Facility name or Kind of Vpn must be compiled");
+            txtKindOfVpn.setError(("Facility name or Kind of Vpn must be compiled"));
+            return false;
+        }
         else{return true;}
 
     }
