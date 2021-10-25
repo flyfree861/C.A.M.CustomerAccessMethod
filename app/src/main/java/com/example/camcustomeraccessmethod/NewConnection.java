@@ -1,5 +1,7 @@
 package com.example.camcustomeraccessmethod;
 
+import static java.lang.String.valueOf;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -82,6 +84,26 @@ public class NewConnection extends AppCompatActivity
         chkExpireDateAdvise = findViewById(R.id.chkNewConnAdvExpireDate);
         btnRegistration = findViewById(R.id.btnNewConnRegisterData);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null)
+        {
+            txtFacilityName.setText(extras.getString        ("facilityName"   ));
+            txtKindOfVpn.setText(extras.getString           ("kindVpn"        ));
+            txtTokenAppAssociated.setText(extras.getString  ("tokenApp"       ));
+            txtUserName.setText(extras.getString            ("userName"       ));
+            txtAccountId.setText(extras.getString           ("accountId"      ));
+            txtRegisteredEmail.setText(extras.getString     ("registeredEmail"));
+            txtPassword.setText(extras.getString            ("password"       ));
+            txtGeneralField1.setText(extras.getString       ("generalField1"  ));
+            txtGeneralField2.setText(extras.getString       ("generalField2"  ));
+            txtNote.setText(extras.getString                ("note"           ));
+            txtItEmail.setText(extras.getString             ("itMail"         ));
+            txtExpireDate.setText(extras.getString          ("expireDate"     ));
+            chkExpireDateAdvise.setChecked(extras.getBoolean("advise"         ));
+            btnRegistration.setText("Update");
+        }
+
+
 
         //Data time picker constructor
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
@@ -140,19 +162,22 @@ public class NewConnection extends AppCompatActivity
                     ConnectionModel connectionModel = null;
                     try
                     {
-                        connectionModel = new ConnectionModel(txtFacilityName.getText().toString(),
-                                txtKindOfVpn.getText().toString(),
-                                txtTokenAppAssociated.getText().toString(),
-                                txtUserName.getText().toString(),
-                                txtAccountId.getText().toString(),
-                                txtRegisteredEmail.getText().toString(),
-                                txtPassword.getText().toString(),
-                                txtGeneralField1.getText().toString(),
-                                txtGeneralField2.getText().toString(),
-                                txtNote.getText().toString(),
-                                txtItEmail.getText().toString(),
-                                txtExpireDate.getText().toString(),
-                                String.valueOf(chkExpireDateAdvise.isChecked()));
+                        connectionModel = new ConnectionModel
+                                (
+                                    txtFacilityName.getText().toString(),
+                                    txtKindOfVpn.getText().toString(),
+                                    txtTokenAppAssociated.getText().toString(),
+                                    txtUserName.getText().toString(),
+                                    txtAccountId.getText().toString(),
+                                    txtRegisteredEmail.getText().toString(),
+                                    txtPassword.getText().toString(),
+                                    txtGeneralField1.getText().toString(),
+                                    txtGeneralField2.getText().toString(),
+                                    txtNote.getText().toString(),
+                                    txtItEmail.getText().toString(),
+                                    txtExpireDate.getText().toString(),
+                                    valueOf(chkExpireDateAdvise.isChecked())
+                                );
                     }
                     catch (Exception exception)
                     {
@@ -162,6 +187,7 @@ public class NewConnection extends AppCompatActivity
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(NewConnection.this);
                     DbAnswerManager result = dataBaseHelper.addNewConnection(connectionModel);
                     Toast.makeText(NewConnection.this, result.getAnswer(), Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
                 else

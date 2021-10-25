@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.camcustomeraccessmethod.DBManager.DataBaseHelper;
+import com.example.camcustomeraccessmethod.NewConnection;
 import com.example.camcustomeraccessmethod.PopupActivity;
 import com.example.camcustomeraccessmethod.R;
 import com.example.camcustomeraccessmethod.ShowConnection;
@@ -68,6 +70,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         viewHolder.circleImageView.setImageResource(R.drawable.ic_factory);
         viewHolder.txtCustomer.setText(connectionModel.get(position).getFacilityName());
         viewHolder.txtKindOfVpn.setText(connectionModel.get(position).getKindOfVpn());
+        if(viewHolder.txtCustomer.getText().equals("Empty") && viewHolder.txtKindOfVpn.getText().equals("Empty"))
+        {
+            viewHolder.btnModify.setEnabled(false);
+            viewHolder.btnDelete.setEnabled(false);
+            viewHolder.btnShow.setEnabled(false);
+        }
         viewHolder.btnDelete.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -77,9 +85,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 boolean result = db.deleteConnection(connectionModel.get(position).getFacilityName(),connectionModel.get(position).getKindOfVpn());
                 if(result)
                 {
-                    connectionModel.remove(position);
-                    notifyDataSetChanged();
-                    Toast.makeText(view.getContext(), "The connection: "+connectionModel.get(position).getFacilityName()+ "has been delete successfully", Toast.LENGTH_SHORT).show();
+                    try
+                    {
+                        connectionModel.remove(position);
+                        notifyDataSetChanged();
+                        Toast.makeText(view.getContext(), "The connection has been delete successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                    catch (Exception exception)
+                    {
+                        Toast.makeText(view.getContext(), exception.toString(), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else
                 {
@@ -94,18 +110,41 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             {
                 Intent intent = new Intent(view.getContext(), PopupActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("facilityName",   (connectionModel.get(position).getFacilityName()       =="") ? "Empty": connectionModel.get(position).getFacilityName());
-                intent.putExtra("kindVpn",        (connectionModel.get(position).getKindOfVpn()          =="") ? "Empty": connectionModel.get(position).getKindOfVpn());
-                intent.putExtra("tokenApp",       (connectionModel.get(position).getTokenAppAssociated() =="") ? "Empty": connectionModel.get(position).getTokenAppAssociated());
-                intent.putExtra("userName",       (connectionModel.get(position).getUserName()           =="") ? "Empty": connectionModel.get(position).getUserName());
-                intent.putExtra("accountId",      (connectionModel.get(position).getAccountId()          =="") ? "Empty": connectionModel.get(position).getAccountId());
-                intent.putExtra("registeredEmail",(connectionModel.get(position).getRegisteredEmail()    =="") ? "Empty": connectionModel.get(position).getRegisteredEmail());
-                intent.putExtra("password",       (connectionModel.get(position).getPassword()           =="") ? "Empty": connectionModel.get(position).getPassword());
-                intent.putExtra("generalField1",  (connectionModel.get(position).getGeneralField1()      =="") ? "Empty": connectionModel.get(position).getGeneralField1());
-                intent.putExtra("generalField2",  (connectionModel.get(position).getGetGeneralField2()   =="") ? "Empty": connectionModel.get(position).getGetGeneralField2());
-                intent.putExtra("note",           (connectionModel.get(position).getNote()               =="") ? "Empty": connectionModel.get(position).getNote());
-                intent.putExtra("itMail",         (connectionModel.get(position).getItEmail()            =="") ? "Empty": connectionModel.get(position).getItEmail());
-                intent.putExtra("expireDate",     (connectionModel.get(position).getExpireDate()         =="") ? "Empty": connectionModel.get(position).getExpireDate());
+                intent.putExtra("facilityName",   (TextUtils.isEmpty(connectionModel.get(position).getFacilityName()       ) ? "": connectionModel.get(position).getFacilityName      ()));
+                intent.putExtra("kindVpn",        (TextUtils.isEmpty(connectionModel.get(position).getKindOfVpn()          ) ? "": connectionModel.get(position).getKindOfVpn         ()));
+                intent.putExtra("tokenApp",       (TextUtils.isEmpty(connectionModel.get(position).getTokenAppAssociated() ) ? "": connectionModel.get(position).getTokenAppAssociated()));
+                intent.putExtra("userName",       (TextUtils.isEmpty(connectionModel.get(position).getUserName()           ) ? "": connectionModel.get(position).getUserName          ()));
+                intent.putExtra("accountId",      (TextUtils.isEmpty(connectionModel.get(position).getAccountId()          ) ? "": connectionModel.get(position).getAccountId         ()));
+                intent.putExtra("registeredEmail",(TextUtils.isEmpty(connectionModel.get(position).getRegisteredEmail()    ) ? "": connectionModel.get(position).getRegisteredEmail   ()));
+                intent.putExtra("password",       (TextUtils.isEmpty(connectionModel.get(position).getPassword()           ) ? "": connectionModel.get(position).getPassword          ()));
+                intent.putExtra("generalField1",  (TextUtils.isEmpty(connectionModel.get(position).getGeneralField1()      ) ? "": connectionModel.get(position).getGeneralField1     ()));
+                intent.putExtra("generalField2",  (TextUtils.isEmpty(connectionModel.get(position).getGetGeneralField2()   ) ? "": connectionModel.get(position).getGetGeneralField2  ()));
+                intent.putExtra("note",           (TextUtils.isEmpty(connectionModel.get(position).getNote()               ) ? "": connectionModel.get(position).getNote              ()));
+                intent.putExtra("itMail",         (TextUtils.isEmpty(connectionModel.get(position).getItEmail()            ) ? "": connectionModel.get(position).getItEmail           ()));
+                intent.putExtra("expireDate",     (TextUtils.isEmpty(connectionModel.get(position).getExpireDate()         ) ? "": connectionModel.get(position).getExpireDate        ()));
+                context.startActivity(intent);
+            }
+        });
+        viewHolder.btnModify.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(view.getContext(), NewConnection.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("facilityName",   (TextUtils.isEmpty(connectionModel.get(position).getFacilityName()      ) ? "": connectionModel.get(position).getFacilityName()));
+                intent.putExtra("kindVpn",        (TextUtils.isEmpty(connectionModel.get(position).getKindOfVpn()         ) ? "": connectionModel.get(position).getKindOfVpn()));
+                intent.putExtra("tokenApp",       (TextUtils.isEmpty(connectionModel.get(position).getTokenAppAssociated()) ? "": connectionModel.get(position).getTokenAppAssociated()));
+                intent.putExtra("userName",       (TextUtils.isEmpty(connectionModel.get(position).getUserName()          ) ? "": connectionModel.get(position).getUserName()));
+                intent.putExtra("accountId",      (TextUtils.isEmpty(connectionModel.get(position).getAccountId()         ) ? "": connectionModel.get(position).getAccountId()));
+                intent.putExtra("registeredEmail",(TextUtils.isEmpty(connectionModel.get(position).getRegisteredEmail()   ) ? "": connectionModel.get(position).getRegisteredEmail()));
+                intent.putExtra("password",       (TextUtils.isEmpty(connectionModel.get(position).getPassword()          ) ? "": connectionModel.get(position).getPassword()));
+                intent.putExtra("generalField1",  (TextUtils.isEmpty(connectionModel.get(position).getGeneralField1()     ) ? "": connectionModel.get(position).getGeneralField1()));
+                intent.putExtra("generalField2",  (TextUtils.isEmpty(connectionModel.get(position).getGetGeneralField2()  ) ? "": connectionModel.get(position).getGetGeneralField2()));
+                intent.putExtra("note",           (TextUtils.isEmpty(connectionModel.get(position).getNote()              ) ? "": connectionModel.get(position).getNote()));
+                intent.putExtra("itMail",         (TextUtils.isEmpty(connectionModel.get(position).getItEmail()           ) ? "" : connectionModel.get(position).getItEmail()));
+                intent.putExtra("expireDate",     (TextUtils.isEmpty(connectionModel.get(position).getExpireDate()        ) ? "": connectionModel.get(position).getExpireDate()));
+                intent.putExtra("advise",         (Boolean.valueOf(connectionModel.get(position).getExpireDateAdvise()    ) ? true : false));
                 context.startActivity(intent);
             }
         });
@@ -127,7 +166,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     {
         CircleImageView circleImageView;
         TextView txtCustomer, txtKindOfVpn;
-        ImageButton btnDelete,btnShow;
+        ImageButton btnDelete,btnShow, btnModify;
 
         public MyConnectionViewHolder(@NonNull View itemView)
         {
@@ -137,6 +176,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             txtKindOfVpn    = itemView.findViewById(R.id.txtShowConnKindVpn);
             btnDelete       = itemView.findViewById(R.id.btnCardListDelete);
             btnShow         = itemView.findViewById(R.id.btnCardListShow);
+            btnModify       = itemView.findViewById(R.id.btnCardListModify);
         }
     }
 
