@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CAMCustomerAccessMethod">
         <activity
+            android:name=".ExpiredConnection"
+            android:exported="false" />
+        <activity
             android:name=".ShowConnection"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewConnection"
             android:exported="true"
@@ -28,7 +32,6 @@
             android:name=".RegistrationActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".PopupActivity"
             android:exported="true"

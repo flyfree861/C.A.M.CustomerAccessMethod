@@ -14,7 +14,7 @@ import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity
 {
-    Button btnNewConn, btnShowConn;
+    Button btnNewConn, btnShowConn, btnShowExpiredConn;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,6 +23,7 @@ public class MainMenu extends AppCompatActivity
 
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
         btnShowConn = findViewById(R.id.btnMainMenuShowConnection);
+        btnShowExpiredConn = findViewById(R.id.btnMainMenuShowExpiredConnection);
 
         btnNewConn.setOnClickListener(view ->
         {
@@ -36,6 +37,16 @@ public class MainMenu extends AppCompatActivity
             public void onClick(View view)
             {
                 Intent in = new Intent(MainMenu.this,ShowConnection.class);
+                startActivity(in);
+            }
+        });
+
+        btnShowExpiredConn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent in = new Intent(MainMenu.this,ExpiredConnection.class);
                 startActivity(in);
             }
         });

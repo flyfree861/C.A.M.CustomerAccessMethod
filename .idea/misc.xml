@@ -11,14 +11,16 @@
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/drawable/input.xml" value="0.22135416666666666" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/drawable/layou_round.xml" value="0.3828125" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/drawable/login_btn.xml" value="0.3828125" />
+        <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_expired_connection.xml" value="0.36666666666666664" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_main_menu.xml" value="0.18" />
+        <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_new_connection.xml" value="0.24427083333333333" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_registration.xml" value="0.33" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_show_connection.xml" value="0.3625" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_sign_in_facebook.xml" value="0.36666666666666664" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/activity_user_registration.xml" value="0.3625" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/alert_dialog.xml" value="0.24427083333333333" />
+        <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/card_expired_date.xml" value="0.36666666666666664" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/connection_card_list.xml" value="0.3625" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/popup_windows_show.xml" value="0.20208333333333334" />
         <entry key="..\:/Android Studio/C.A.M.CustomerAccessMethod/app/src/main/res/layout/splash_screen.xml" value="0.36666666666666664" />

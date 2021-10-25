@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.camcustomeraccessmethod.ExpiredConnection;
 import com.example.camcustomeraccessmethod.Models.ConnectionModel;
 import com.example.camcustomeraccessmethod.NewConnection;
 
@@ -174,6 +175,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         }
 
     }
+
 
     public boolean deleteConnection(String connection, String kindVpn)
     {

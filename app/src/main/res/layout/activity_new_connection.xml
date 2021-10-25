@@ -45,6 +45,8 @@
         android:layout_height="600dp"
         android:isScrollContainer="true"
         android:windowSoftInputMode="adjustPan"
+        android:scrollbars="vertical"
+        android:background="@drawable/layou_round"
         app:layout_constraintBottom_toBottomOf="@id/mainLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -71,8 +73,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@null"
+                android:backgroundTint="#FFFFFF"
                 android:backgroundTintMode="@null"
+                android:foregroundTint="#FFFFFF"
                 android:imeOptions="actionNext"
                 android:nextFocusDown="@+id/txtNameVpn"
                 android:singleLine="true"
@@ -86,11 +89,13 @@
                 app:boxStrokeColor="@color/white"
                 app:counterTextColor="@color/white"
                 app:endIconMode="clear_text"
+                app:endIconTint="#FFFFFF"
                 app:helperTextTextColor="@color/white"
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_factory">
+                app:startIconDrawable="@drawable/ic_factory"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNameFactory"
@@ -117,6 +122,7 @@
                 android:nextFocusDown="@+id/txtNewConnUser"
                 android:singleLine="true"
                 android:textColorHint="@color/white"
+                app:endIconTint="#FFFFFF"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -130,7 +136,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_vpn_bw">
+                app:startIconDrawable="@drawable/ic_vpn_bw"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnNameVpn"
@@ -157,6 +164,7 @@
                 android:nextFocusDown="@+id/txtNameVpn"
                 android:singleLine="true"
                 android:textColorHint="@color/white"
+                app:endIconTint="#FFFFFF"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -170,7 +178,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_token">
+                app:startIconDrawable="@drawable/ic_token"
+                app:startIconTint="@color/white">>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnTokenApp"
@@ -194,6 +203,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="#FFFFFF"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -207,7 +217,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_username">
+                app:startIconDrawable="@drawable/ic_username"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnUser"
@@ -231,6 +242,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="#FFFFFF"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -244,7 +256,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_account_id">
+                app:startIconDrawable="@drawable/ic_account_id"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnAccountId"
@@ -268,6 +281,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="#FFFFFF"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -281,7 +295,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_mail_bw">
+                app:startIconDrawable="@drawable/ic_mail_bw"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnEmail"
@@ -315,11 +330,13 @@
                 app:boxStrokeColor="@color/white"
                 app:counterTextColor="@color/white"
                 app:endIconMode="password_toggle"
+                app:endIconTint="@color/white"
                 app:helperTextTextColor="@color/white"
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_password_bw">
+                app:startIconDrawable="@drawable/ic_password_bw"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnPassword"
@@ -344,6 +361,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="@color/white"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -357,7 +375,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_unknow_field">
+                app:startIconDrawable="@drawable/ic_unknow_field"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnField1"
@@ -381,6 +400,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="@color/white"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -394,7 +414,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_unknow_field">
+                app:startIconDrawable="@drawable/ic_unknow_field"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnField2"
@@ -418,6 +439,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="@color/white"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -431,7 +453,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_note">
+                app:startIconDrawable="@drawable/ic_note"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnNote"
@@ -455,6 +478,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="@color/white"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -468,7 +492,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_it_mail">
+                app:startIconDrawable="@drawable/ic_it_mail"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnItMail"
@@ -493,6 +518,7 @@
                 android:backgroundTint="@null"
                 android:backgroundTintMode="@null"
                 android:textColorHint="@color/white"
+                app:endIconTint="@color/white"
                 app:boxBackgroundColor="@null"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
@@ -506,7 +532,8 @@
                 app:hintAnimationEnabled="true"
                 app:hintTextColor="#FFFFFF"
                 app:passwordToggleTint="@color/white"
-                app:startIconDrawable="@drawable/ic_expire_date">
+                app:startIconDrawable="@drawable/ic_expire_date"
+                app:startIconTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtNewConnExpiredDate"
@@ -545,7 +572,6 @@
                 android:textColorLink="#FFFFFF"
                 app:cornerRadius="10dp"
                 app:strokeColor="@color/white" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

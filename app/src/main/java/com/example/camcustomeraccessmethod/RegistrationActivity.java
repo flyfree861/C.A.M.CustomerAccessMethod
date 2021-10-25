@@ -25,7 +25,6 @@ public class RegistrationActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
-
         //Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         txtEmail = findViewById(R.id.txtRegEmail);
