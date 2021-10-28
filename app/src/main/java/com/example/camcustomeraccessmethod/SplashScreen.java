@@ -34,6 +34,9 @@ public class SplashScreen extends AppCompatActivity
         primo.setAnimation(bottomAnim);
         secondo.setAnimation(bottomAnim);
 
+
+
+
         new Handler().postDelayed(new Runnable()
         {
             @Override

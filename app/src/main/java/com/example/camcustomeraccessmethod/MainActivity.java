@@ -3,6 +3,8 @@ package com.example.camcustomeraccessmethod;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import androidx.biometric.BiometricPrompt;
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         btnLogin = findViewById(R.id.btnLogin);
 
         mAuth = FirebaseAuth.getInstance();
@@ -115,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             txtUser.setText(userFromActivity);
             txtPassword.setText(passwordFromActivity);
         }
+
 
 
         //===================================== Autenticazione Biometrica ==========================
@@ -186,8 +192,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txtRegisterUsr:
                 register();
                 break;
+
+
         }
     }
+
 
 // ================================== Login Biometric ==============================================
     private void signInFinger()
@@ -311,6 +320,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
 
 

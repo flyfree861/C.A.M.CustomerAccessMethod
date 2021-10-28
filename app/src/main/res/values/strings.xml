@@ -16,5 +16,7 @@
     <string name="facebook_app_id">568688654371939</string>
     <string name="fb_login_protocol_scheme">fb568688654371939</string>
     <string name="registeredEmail">Registered e-mail</string>
+    <string name="channel_name">name</string>
+    <string name="channel_description">description</string>
 
 </resources>

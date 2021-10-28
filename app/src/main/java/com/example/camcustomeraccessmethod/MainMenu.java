@@ -1,25 +1,35 @@
 package com.example.camcustomeraccessmethod;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.camcustomeraccessmethod.DBManager.DataBaseHelper;
+
 public class MainMenu extends AppCompatActivity
 {
-    Button btnNewConn, btnShowConn, btnShowExpiredConn;
+    Button btnNewConn, btnShowConn, btnShowExpiredConn, btnNot;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+
+        startService(new Intent(this,NotificationService.class));
 
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
         btnShowConn = findViewById(R.id.btnMainMenuShowConnection);
@@ -50,5 +60,12 @@ public class MainMenu extends AppCompatActivity
                 startActivity(in);
             }
         });
+
+
+
     }
+
+
+
+
 }
