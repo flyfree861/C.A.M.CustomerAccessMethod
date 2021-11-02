@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.CAMCustomerAccessMethod">
-        <service android:enabled="true" android:name=".NotificationService">
+        <service
+            android:enabled="true"
+            android:name=".NotificationService">
         </service>
         <activity
             android:name=".ExpiredConnection"
@@ -40,6 +42,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -50,17 +53,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>

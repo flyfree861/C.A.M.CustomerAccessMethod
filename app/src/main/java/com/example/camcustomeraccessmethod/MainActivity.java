@@ -11,10 +11,16 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -71,8 +77,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //to generate notification
+        createNotificationChannel();
+        Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
 
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
+        long timeAtButtonClick = System.currentTimeMillis();
+        long tenSecondInMillisecond = 1000*10;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                timeAtButtonClick + tenSecondInMillisecond,pendingIntent);
 
         btnLogin = findViewById(R.id.btnLogin);
 
@@ -331,5 +347,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Implements Code
     }
 
+    //to set notification
+    private void createNotificationChannel()
+    {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            CharSequence name = "Channel1";
+            String description = "Channel for notification";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Channel1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 }

@@ -31,6 +31,7 @@ public class MainMenu extends AppCompatActivity
 
         startService(new Intent(this,NotificationService.class));
 
+        btnNot = findViewById(R.id.not);
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
         btnShowConn = findViewById(R.id.btnMainMenuShowConnection);
         btnShowExpiredConn = findViewById(R.id.btnMainMenuShowExpiredConnection);
