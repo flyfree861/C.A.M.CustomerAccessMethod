@@ -29,7 +29,7 @@ public class MainMenu extends AppCompatActivity
         setContentView(R.layout.activity_main_menu);
 
 
-        startService(new Intent(this,NotificationService.class));
+
 
         btnNot = findViewById(R.id.not);
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
