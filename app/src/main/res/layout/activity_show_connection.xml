@@ -13,14 +13,14 @@
         android:id="@+id/linearLayoutExpConnTitle"
         android:layout_width="410dp"
         android:layout_height="91dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="640dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="68dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_show_connection_48px" />
+            android:src="@drawable/ic_show_connection_48" />
 
         <TextView
             android:layout_width="wrap_content"

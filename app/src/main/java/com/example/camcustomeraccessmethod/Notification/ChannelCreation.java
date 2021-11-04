@@ -11,7 +11,7 @@ import com.example.camcustomeraccessmethod.R;
 
 public class ChannelCreation extends Application
 {
-    public static final String CHANNEL_1 = "Channel1";
+    public static final String CHANNEL_ID = "Channel1";
 
     @Override
     public void onCreate()
@@ -29,7 +29,7 @@ public class ChannelCreation extends Application
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_1, name, importance);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this

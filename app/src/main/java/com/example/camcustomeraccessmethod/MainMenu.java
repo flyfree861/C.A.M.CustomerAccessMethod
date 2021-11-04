@@ -18,10 +18,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.camcustomeraccessmethod.DBManager.DataBaseHelper;
+import com.example.camcustomeraccessmethod.Notification.Notification;
+import com.google.android.material.button.MaterialButton;
 
 public class MainMenu extends AppCompatActivity
 {
-    Button btnNewConn, btnShowConn, btnShowExpiredConn, btnNot;
+    Button btnNewConn, btnShowConn, btnShowExpiredConn;
+    MaterialButton btnSetting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,7 +35,7 @@ public class MainMenu extends AppCompatActivity
 
 
 
-        btnNot = findViewById(R.id.not);
+        btnSetting = findViewById(R.id.btnMainMenuSetting);
         btnNewConn  = findViewById(R.id.btnMainMenuNewConnection);
         btnShowConn = findViewById(R.id.btnMainMenuShowConnection);
         btnShowExpiredConn = findViewById(R.id.btnMainMenuShowExpiredConnection);
@@ -62,7 +66,15 @@ public class MainMenu extends AppCompatActivity
             }
         });
 
-
+        btnSetting.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Notification notification = new Notification(view, MainMenu.this);
+                notification.SendNotification();
+            }
+        });
 
     }
 
