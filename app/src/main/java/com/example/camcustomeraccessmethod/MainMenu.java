@@ -71,8 +71,8 @@ public class MainMenu extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Notification notification = new Notification(view, MainMenu.this);
-                notification.SendNotification();
+                Intent intent = new Intent(MainMenu.this,SettingActivity.class);
+                startActivity(intent);
             }
         });
 

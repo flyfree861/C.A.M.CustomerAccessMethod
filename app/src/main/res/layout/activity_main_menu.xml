@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_main_gradient"
-    tools:context=".MainMenu">
+    tools:context=".MainMenu"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="106dp"
-        android:gravity="left"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +42,9 @@
         android:id="@+id/btnMainMenuNewConnection"
         android:layout_width="370dp"
         android:layout_height="88dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="75dp"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
         android:background="@drawable/layou_round"
         android:drawableLeft="@drawable/ic_new_connection_48"
         android:fontFamily="@font/poppins"
@@ -57,42 +53,32 @@
         android:textColor="@color/white"
         app:backgroundTint="@null"
         app:cornerRadius="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.002"
         app:srcCompat="@drawable/ic_new_connection" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMainMenuShowConnection"
         android:layout_width="371dp"
         android:layout_height="91dp"
+        android:layout_gravity="center"
         android:background="@drawable/layou_round"
         android:backgroundTint="@null"
         android:drawableLeft="@drawable/ic_show_connection_48"
-
         android:fontFamily="@font/poppins"
         android:soundEffectsEnabled="true"
         android:text="Show all connection"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         app:backgroundTint="@null"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMainMenuNewConnection"
-        app:layout_constraintVertical_bias="0.00" />
+        app:cornerRadius="10dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMainMenuShowExpiredConnection"
         android:layout_width="371dp"
         android:layout_height="91dp"
+        android:layout_gravity="center"
         android:background="@drawable/layou_round"
         android:backgroundTint="@null"
+        android:paddingLeft="20dp"
         android:drawableLeft="@drawable/ic_expire_date_48"
         android:fontFamily="@font/poppins"
         android:soundEffectsEnabled="true"
@@ -100,18 +86,15 @@
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         app:backgroundTint="@null"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMainMenuShowConnection"
-        app:layout_constraintVertical_bias="0.0" />
+        app:cornerRadius="10dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMainMenuSetting"
         android:layout_width="371dp"
         android:layout_height="91dp"
+        android:layout_gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="75dp"
         android:background="@drawable/layou_round"
         android:backgroundTint="@null"
         android:drawableLeft="@drawable/ic_setting_48x48"
@@ -121,12 +104,6 @@
         android:text="Setting"
         android:textColor="@color/white"
         app:backgroundTint="@null"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMainMenuShowExpiredConnection"
-        app:layout_constraintVertical_bias="0.0" />
+        app:cornerRadius="10dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

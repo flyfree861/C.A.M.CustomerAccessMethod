@@ -1,5 +1,6 @@
 package com.example.camcustomeraccessmethod;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Layout;
@@ -131,4 +132,11 @@ public class PopupActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent(PopupActivity.this,ShowConnection.class);
+        startActivity(intent);
+    }
 }

@@ -33,7 +33,7 @@
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
         android:src="@drawable/ic_cam"
-        android:tint="#FFFFFF" />
+        app:tint="#FFFFFF" />
 
 
 

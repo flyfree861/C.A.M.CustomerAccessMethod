@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -19,9 +20,6 @@ import java.util.List;
 public class ShowConnection extends AppCompatActivity
 {
     List<ConnectionModel> connectionModelsList = new ArrayList<>();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -119,5 +117,13 @@ public class ShowConnection extends AppCompatActivity
             Toast.makeText(ShowConnection.this, exception.toString(), Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent(ShowConnection.this, MainMenu.class);
+        startActivity(intent);
     }
 }

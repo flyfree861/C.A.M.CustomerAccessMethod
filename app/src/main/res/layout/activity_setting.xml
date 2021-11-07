@@ -9,38 +9,81 @@
     android:orientation="vertical"
     android:background="@drawable/bg_main_gradient">
 
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="68dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_setting_48x48" />
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="68dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_setting_48x48" />
 
-        <TextView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:layout_gravity="center"
+        android:text="Setting"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/chkSettingEnableNotify"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:text="Enable expiring notification"/>
+
+    <LinearLayout
+        android:id="@+id/layoutSetHour"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSettingSetHours"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/poppins"
-            android:layout_gravity="center"
-            android:text="Setting"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:text="set hour notification"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/white" />
 
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblSettingHourSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
+            android:inputType="time"
+            android:text="24:59"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins"
+            android:textSize="35dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"/>
 
-            <CheckBox
-                android:id="@+id/chkSettingEnableNotify"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/poppins"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:text="Enable expiring notification"/>
-        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSettingSave"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Save"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:cornerRadius="10dp"
+        app:strokeColor="@color/white" />
 
 </LinearLayout>
